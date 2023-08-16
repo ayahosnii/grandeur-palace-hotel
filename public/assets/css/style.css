@@ -832,8 +832,22 @@ ul, ol {
 -----------------------*/
 
 .testimonial-section {
-	background: #f9f9f9;
+    position: relative;
+    background-image: url("../img/hero/slider_bg_01.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
+.testimonial-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 .testimonial-section .section-title {
 	margin-bottom: 30px;
 }
@@ -874,7 +888,7 @@ ul, ol {
 }
 .testimonial-slider .ts-item p {
 	font-size: 20px;
-	color: #707079;
+	color: #cdcdcd;
 	line-height: 30px;
 	margin-bottom: 50px;
 }
@@ -890,7 +904,7 @@ ul, ol {
 }
 .testimonial-slider .ts-item .ti-author h5 {
 	font-size: 20px;
-	color: #19191a;
+	color: #cdcdcd;
 	display: inline-block;
 }
 /*---------------------
