@@ -693,7 +693,7 @@ ul, ol {
 	bottom: 17px;
 }
 .booking-form2 form .select-option {
-	margin-bottom: 15px;
+	margin-bottom: 35px;
 }
 .booking-form2 form .select-option label {
 	font-size: 14px;
@@ -1654,6 +1654,17 @@ ul, ol {
 	font-weight: 500;
 	padding-left: 20px;
 }
+.room-booking form .select-option .slider-box input{
+	width: 100%;
+	height: 50px;
+	border: 1px solid #ebebeb;
+	border-radius: 2px;
+	font-size: 16px;
+	color: #19191a;
+	text-transform: uppercase;
+	font-weight: 500;
+	padding-left: 20px;
+}
 .room-booking form .check-date i {
 	color: #d6b770;
 	position: absolute;
@@ -2531,3 +2542,8 @@ ul, ol {
 		margin-bottom: 10px;
 	}
 }
+
+.slider-box {width: 90%; margin: 35px auto}
+label, input {border: none; display: inline-block; margin-right: -4px; vertical-align: top; width: 30%}
+input {width: 70%}
+.slider {margin: 25px 0}
