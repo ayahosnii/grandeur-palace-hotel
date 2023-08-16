@@ -157,7 +157,7 @@ ul, ol {
 	top: 0;
 	left: 0;
 	z-index: 999999;
-	background: #ffffff;
+	background: #2a2a2a;
 }
 .loader {
 	width: 40px;
@@ -175,31 +175,31 @@ ul, ol {
 	0% {
 		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
-		border: 4px solid #f44336;
+		border: 4px solid #e0c381;
 		border-left-color: transparent;
 	}
 	50% {
 		-webkit-transform: rotate(180deg);
 		transform: rotate(180deg);
-		border: 4px solid #673ab7;
+		border: 4px solid #e7cd92;
 		border-left-color: transparent;
 	}
 	100% {
 		-webkit-transform: rotate(360deg);
 		transform: rotate(360deg);
-		border: 4px solid #f44336;
+		border: 4px solid #918054;
 		border-left-color: transparent;
 	}
 }
 @-webkit-keyframes loader {
 	0% {
 		-webkit-transform: rotate(0deg);
-		border: 4px solid #f44336;
+		border: 4px solid #d5c393;
 		border-left-color: transparent;
 	}
 	50% {
 		-webkit-transform: rotate(180deg);
-		border: 4px solid #673ab7;
+		border: 4px solid #fde2a5;
 		border-left-color: transparent;
 	}
 	100% {
@@ -277,6 +277,9 @@ ul, ol {
     z-index: 900;
     width: 100%;
     margin-bottom: 10px;
+}
+.header-section{
+    z-index: 1000;
 }
 .hp-room-section{
     background: #554b3f;
@@ -686,6 +689,16 @@ ul, ol {
 }
 .hero-slider .owl-stage-outer, .hero-slider .owl-stage, .hero-slider .owl-item, .hero-slider .hs-item {
 	height: 100%;
+}
+
+.hero-slider .owl-stage-outer, .hero-slider .owl-stage:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 /*---------------------
   About US
@@ -2027,7 +2040,7 @@ ul, ol {
 }
 @media only screen and (min-width: 1200px) {
 	.container {
-		max-width: 1170px;
+		max-width: 1500px;
 	}
 }
 /* Medium Device: 1200px */
