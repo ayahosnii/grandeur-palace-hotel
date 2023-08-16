@@ -134,6 +134,11 @@ ul, ol {
 	font-weight: 700;
 	position: relative;
 }
+.primary-btn:hover {
+    color: #ffffff;
+    background: #d6b770;
+    padding: 5px;
+}
 .primary-btn:after {
 	position: absolute;
 	left: 0;
@@ -265,18 +270,32 @@ ul, ol {
 /*---------------------
   Header
 -----------------------*/
-header{
-    background: #2a2a2a;
+.header-section{
+    padding: 0;
+    position: absolute;
+    top: 0;
+    z-index: 900;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.hp-room-section{
+    background: #554b3f;
 }
 
 .header-section.header-normal .menu-item {
 	-webkit-box-shadow: 0px 12px 15px rgba(36, 11, 12, 0.05);
 	box-shadow: 0px 12px 15px rgba(36, 11, 12, 0.05);
 }
-.top-nav {
-	border-bottom: 1px solid #e5e5e5;
+.mainmenu {
+    width: 100%;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
 }
-.top-nav .tn-left li {
+.mainmenu.sticky  {
+    position: fixed;
+    background-color: #333;
+}
+.mainmenu .tn-left li {
 	list-style: none;
 	display: inline-block;
 	font-size: 16px;
@@ -286,7 +305,7 @@ header{
 	margin-right: 64px;
 	position: relative;
 }
-.top-nav .tn-left li:after {
+.mainmenu .tn-left li:after {
 	position: absolute;
 	right: -32px;
 	top: 0;
@@ -295,31 +314,31 @@ header{
 	background: #e5e5e5;
 	content: "";
 }
-.top-nav .tn-left li:last-child {
+.mainmenu .tn-left li:last-child {
 	margin-right: 0;
 }
-.top-nav .tn-left li:last-child:after {
+.mainmenu .tn-left li:last-child:after {
 	display: none;
 }
-.top-nav .tn-left li i {
+.mainmenu .tn-left li i {
 	color: #d6b770;
 	margin-right: 4px;
 }
-.top-nav .tn-right {
+.mainmenu .tn-right {
 	text-align: right;
 }
-.top-nav .tn-right .top-social {
+.mainmenu .tn-right .top-social {
 	display: inline-block;
 	margin-right: 35px;
 	padding: 13px 0;
 }
-.top-nav .tn-right .top-social a {
+.mainmenu .tn-right .top-social a {
 	display: inline-block;
 	font-size: 16px;
 	color: #19191a;
 	margin-left: 15px;
 }
-.top-nav .tn-right .bk-btn {
+.bk-btn {
 	display: inline-block;
 	font-size: 13px;
 	font-weight: 700;
@@ -328,32 +347,33 @@ header{
 	color: #ffffff;
 	text-transform: uppercase;
 	letter-spacing: 2px;
+    margin: 5px;
 }
-.top-nav .tn-right .language-option {
+.mainmenu .tn-right .language-option {
 	display: inline-block;
 	margin-left: 30px;
 	cursor: pointer;
 	padding: 13px 0px 11px;
 	position: relative;
 }
-.top-nav .tn-right .language-option:hover .flag-dropdown {
+.mainmenu .tn-right .language-option:hover .flag-dropdown {
 	top: 40px;
 	opacity: 1;
 	visibility: visible;
 }
-.top-nav .tn-right .language-option img {
+.mainmenu .tn-right .language-option img {
 	height: 26px;
 	width: 26px;
 	border-radius: 50%;
 	margin-right: 10px;
 }
-.top-nav .tn-right .language-option span {
+.mainmenu .tn-right .language-option span {
 	font-size: 16px;
 	color: #19191a;
 	text-transform: uppercase;
 	font-weight: 500;
 }
-.top-nav .tn-right .language-option .flag-dropdown {
+.mainmenu .tn-right .language-option .flag-dropdown {
 	position: absolute;
 	left: 0;
 	top: 60px;
@@ -370,11 +390,11 @@ header{
 	transition: all 0.3s;
 	z-index: 99;
 }
-.top-nav .tn-right .language-option .flag-dropdown ul li {
+.mainmenu .tn-right .language-option .flag-dropdown ul li {
 	list-style: none;
 	text-align: left;
 }
-.top-nav .tn-right .language-option .flag-dropdown ul li a {
+.mainmenu .tn-right .language-option .flag-dropdown ul li a {
 	font-size: 14px;
 	text-transform: uppercase;
 	font-weight: 500;
@@ -383,7 +403,7 @@ header{
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
 }
-.top-nav .tn-right .language-option .flag-dropdown ul li a:hover {
+.mainmenu .tn-right .language-option .flag-dropdown ul li a:hover {
 	color: #d6b770;
 }
 .menu-item {
@@ -512,6 +532,7 @@ header{
 .hero-section .container {
 	position: relative;
 	z-index: 5;
+    margin-top: 100px;
 }
 .hero-text {
 	padding-top: 145px;
@@ -532,9 +553,10 @@ header{
 	background: #ffffff;
 	padding: 44px 40px 50px 40px;
 	border-radius: 4px;
+    background: rgba(214, 183, 112, 0.75);
 }
 .booking-form h3 {
-	color: #19191a;
+	color: #755813;
 	margin-bottom: 36px;
 }
 .booking-form form .check-date {
@@ -543,7 +565,7 @@ header{
 }
 .booking-form form .check-date label {
 	font-size: 14px;
-	color: #707079;
+	color: #efefef;
 	display: block;
 	margin-bottom: 10px;
 }
@@ -569,7 +591,7 @@ header{
 }
 .booking-form form .select-option label {
 	font-size: 14px;
-	color: #707079;
+	color: #efefef;
 	display: block;
 	margin-bottom: 10px;
 }
@@ -606,14 +628,27 @@ header{
 	display: block;
 	font-size: 14px;
 	text-transform: uppercase;
-	border: 1px solid #d6b770;
+	border: 1px solid #fcd696;
 	border-radius: 2px;
-	color: #d6b770;
+	color: #fcd696;
 	font-weight: 500;
 	background: transparent;
 	width: 100%;
 	height: 46px;
 	margin-top: 30px;
+}
+.booking-form form button:hover {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: 1px solid #d6b770;
+    border-radius: 2px;
+    color: #FFF;
+    font-weight: 500;
+    background: #d6b770;
+    width: 100%;
+    height: 46px;
+    margin-top: 30px;
 }
 .hero-slider {
 	position: absolute;
@@ -660,7 +695,7 @@ header{
 	padding: 0 35px;
 }
 .about-text p {
-	color: #ffffff;
+	color: #cdcdcd;
 	font-weight: 500;
 }
 .about-text p.f-para {
@@ -674,6 +709,9 @@ header{
 }
 .about-pic img {
 	min-width: 100%;
+    height: 350px;
+    width: 350px;
+    padding-top: 90px;
 }
 /*---------------------
   Service Section
@@ -870,7 +908,7 @@ header{
 -----------------------*/
 
 .footer-section {
-	background: #222736;
+	background: #2a2a2a;
 }
 .footer-section .footer-text {
 	padding: 80px 0 30px;
@@ -945,7 +983,7 @@ header{
 	width: 100%;
 	height: 50px;
 	border-radius: 2px;
-	background: #393D4A;
+	background: #212222;
 	border: none;
 	padding-left: 20px;
 	font-size: 16px;
@@ -1993,8 +2031,8 @@ header{
 		bottom: 80px;
 	}
 }
-@media only screen and (max-width: 991px) {
-	.top-nav {
+@media only screen and (max-width: 1200px) {
+	.mainmenu {
 		display: none;
 	}
 	.menu-item .nav-menu {
@@ -2238,6 +2276,8 @@ header{
 	}
 	.about-pic img {
 		margin-bottom: 20px;
+        height: 350px;
+        width: 350px;
 	}
 	.room-booking {
 		padding: 0;

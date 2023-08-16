@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="hero-text">
-                        <h1>Sona A Luxury Hotel</h1>
+                        <h1>Grandeur Palace</h1>
                         <p>Here are the best hotel booking sites, including recommendations for international
                             travel and for finding low-priced hotel rooms.</p>
                         <a href="#" class="primary-btn">Discover Now</a>
@@ -140,7 +140,9 @@
                                         <td>Max persion 5</td>
                                     </tr>
                                     <tr>
-                                        <td class="r-o">Bed:</td>
+                                        <td class="r-o">
+                                            <i class="flaticon-026-bed"></i>
+                                        </td>
                                         <td>King Beds</td>
                                     </tr>
                                     <tr>
@@ -169,7 +171,9 @@
                                         <td>Max persion 5</td>
                                     </tr>
                                     <tr>
-                                        <td class="r-o">Bed:</td>
+                                        <td class="r-o">
+                                            <i class="flaticon-026-bed"></i>
+                                        </td>
                                         <td>King Beds</td>
                                     </tr>
                                     <tr>
@@ -183,7 +187,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="{{asset('assets/img/room/room-b3.jpg')}}">
+                        <div class="hp-room-item set-bg" data-setbg="{{asset('assets/img/room/double-room.jpeg')}}">
                             <div class="hr-text">
                                 <h3>Deluxe Room</h3>
                                 <h2>198$<span>/Pernight</span></h2>
@@ -198,7 +202,9 @@
                                         <td>Max persion 5</td>
                                     </tr>
                                     <tr>
-                                        <td class="r-o">Bed:</td>
+                                        <td class="r-o">
+                                            <i class="flaticon-026-bed"></i>
+                                        </td>
                                         <td>King Beds</td>
                                     </tr>
                                     <tr>
@@ -227,7 +233,9 @@
                                         <td>Max persion 5</td>
                                     </tr>
                                     <tr>
-                                        <td class="r-o">Bed:</td>
+                                        <td class="r-o">
+                                            <i class="flaticon-026-bed"></i>
+                                        </td>
                                         <td>King Beds</td>
                                     </tr>
                                     <tr>
@@ -268,10 +276,10 @@
                     <div class="about-pic">
                         <div class="row">
                             <div class="col-sm-6">
-                                <img src="{{asset('assets/img/about/about-1.jpg')}}" alt="">
+                                <img src="{{asset('assets/img/about/about-5.jpg')}}" alt="">
                             </div>
                             <div class="col-sm-6">
-                                <img src="{{asset('assets/img/about/about-2.jpg')}}" alt="">
+                                <img src="{{asset('assets/img/about/about-4.jpg')}}" alt="">
                             </div>
                         </div>
                     </div>
