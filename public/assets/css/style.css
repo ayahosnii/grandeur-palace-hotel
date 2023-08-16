@@ -654,6 +654,108 @@ ul, ol {
     height: 46px;
     margin-top: 30px;
 }
+
+.booking-form2 {
+	background: #ffffff;
+	padding: 44px 40px 50px 40px;
+	border-radius: 4px;
+    background: rgba(214, 183, 112, 0.100);
+}
+.booking-form2 h3 {
+	color: #c79f67;
+	margin-bottom: 36px;
+}
+.booking-form2 form .check-date {
+	position: relative;
+	margin-bottom: 15px;
+}
+.booking-form2 form .check-date label {
+	font-size: 14px;
+	color: #efefef;
+	display: block;
+	margin-bottom: 10px;
+}
+.booking-form2 form .check-date input {
+	width: 100%;
+	height: 50px;
+	border: 1px solid #ebebeb;
+	border-radius: 2px;
+	font-size: 10px;
+	color: #19191a;
+	text-transform: uppercase;
+	font-weight: 500;
+	padding-left: 20px;
+}
+.booking-form2 form .check-date i {
+	color: #d6b770;
+	position: absolute;
+	right: 18px;
+	bottom: 17px;
+}
+.booking-form2 form .select-option {
+	margin-bottom: 15px;
+}
+.booking-form2 form .select-option label {
+	font-size: 14px;
+	color: #efefef;
+	display: block;
+	margin-bottom: 10px;
+}
+.booking-form2 form .select-option .nice-select {
+	border-radius: 2px;
+	border: 1px solid #ebebeb;
+	height: 50px;
+	line-height: 50px;
+	outline: none;
+	padding-left: 20px;
+	width: 100%;
+	float: none;
+}
+.booking-form2 form .select-option .nice-select:after {
+	border-bottom: 2px solid #d6b770;
+	border-right: 2px solid #d6b770;
+	height: 10px;
+	margin-top: 0;
+	right: 20px;
+	width: 10px;
+	top: 36%;
+}
+.booking-form2 form .select-option .nice-select span {
+	font-size: 16px;
+	color: #19191a;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+.booking-form2 form .select-option .nice-select .list {
+	margin-top: 0;
+	width: 100%;
+}
+.booking-form2 form button {
+	display: block;
+	font-size: 14px;
+	text-transform: uppercase;
+	border: 1px solid #fcd696;
+	border-radius: 2px;
+	color: #fcd696;
+	font-weight: 500;
+	background: transparent;
+	width: 100%;
+	height: 46px;
+	margin-top: 30px;
+}
+.booking-form2 form button:hover {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: 1px solid #d6b770;
+    border-radius: 2px;
+    color: #FFF;
+    font-weight: 500;
+    background: #d6b770;
+    width: 100%;
+    height: 46px;
+    margin-top: 30px;
+}
 .hero-slider {
 	position: absolute;
 	width: 100%;
@@ -1059,13 +1161,14 @@ ul, ol {
 .breadcrumb-section {
 	padding-top: 70px;
 	padding-bottom: 80px;
+    background-image: url("../img/hero/hero-3.jpg")
 }
 .breadcrumb-text {
 	text-align: center;
 }
 .breadcrumb-text h2 {
 	font-size: 44px;
-	color: #19191a;
+	color: #d6aa4c;
 	margin-bottom: 12px;
 }
 .breadcrumb-text .bt-option a {
@@ -1083,7 +1186,7 @@ ul, ol {
 	content: "";
 	font-size: 18px;
 	font-family: "FontAwesome";
-	color: #aaaab3;
+	color: #fff;
 }
 .breadcrumb-text .bt-option span {
 	display: inline-block;
@@ -1233,12 +1336,14 @@ ul, ol {
 .rooms-section {
 	padding-top: 0;
 	padding-bottom: 80px;
+    /*padding-left: 30%;*/
 }
 .room-item {
 	margin-bottom: 30px;
 }
 .room-item img {
 	min-width: 100%;
+	height: 350px;
 }
 .room-item .ri-text {
 	border: 1px solid #ebebeb;
@@ -1246,7 +1351,7 @@ ul, ol {
 	padding: 24px 24px 30px 28px;
 }
 .room-item .ri-text h4 {
-	color: #19191a;
+	color: #d6b770;
 	margin-bottom: 17px;
 }
 .room-item .ri-text h3 {
@@ -1258,21 +1363,33 @@ ul, ol {
 	font-family: "Cabin", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
-	color: #19191a;
+	color: #c7c7c7;
 }
 .room-item .ri-text table {
 	margin-bottom: 18px;
 }
 .room-item .ri-text table tbody tr td {
 	font-size: 16px;
-	color: #707079;
+	color: #c7c7c7;
 	line-height: 36px;
 }
 .room-item .ri-text table tbody tr td.r-o {
 	width: 125px;
 }
-.room-item .ri-text .primary-btn {
-	color: #19191a;
+.room-item .ri-text
+.primary-btn {
+    display: inline-block;
+    font-size: 13px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    position: relative;
+}
+.primary-btn:hover {
+    color: #ffffff;
+    background: #d6b770;
+    padding: 5px;
 }
 .room-pagination {
 	text-align: center;

@@ -60,7 +60,7 @@
     <nav class="mainmenu mobile-menu" id="mainmenu">
         <ul>
             <li class="active"><a href="./index.html">Home</a></li>
-            <li><a href="./rooms.html">Rooms</a></li>
+            <li><a href="{{route('rooms')}}">Rooms</a></li>
             <li><a href="./about-us.html">About Us</a></li>
             <li><a href="./pages.html">Pages</a>
                 <ul class="dropdown">
@@ -101,7 +101,7 @@
                         <nav class="mainmenu">
                             <ul>
                                 <li class="active"><a href="./index.html">Home</a></li>
-                                <li><a href="./rooms.html">Rooms</a></li>
+                                <li><a href="{{route('rooms')}}">Rooms</a></li>
                                 <li><a href="./about-us.html">About Us</a></li>
                                 <li><a href="./pages.html">Pages</a>
                                     <ul class="dropdown">
