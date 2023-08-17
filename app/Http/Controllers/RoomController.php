@@ -14,8 +14,7 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::get();
-        return view('rooms', compact('rooms'));
+        return view('rooms');
     }
 
     /**
@@ -23,9 +22,25 @@ class RoomController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function roomsApi(Request $request)
     {
-        //
+        $query = Room::query();
+
+        if ($request->has('room_type')) {
+            $query->where('room_type', $request->input('room_type'));
+        }
+
+        if ($request->has('bed_type')) {
+            $query->where('bed_type', $request->input('bed_type'));
+        }
+
+        if ($request->has('services')) {
+            $query->where('services', 'LIKE', '%' . $request->input('services') . '%');
+        }
+
+        $rooms = $query->get();
+
+        return response()->json($rooms);
     }
 
     /**
