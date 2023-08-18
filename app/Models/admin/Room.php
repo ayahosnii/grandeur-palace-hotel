@@ -2,6 +2,7 @@
 
 namespace App\Models\admin;
 
+use App\Models\Service;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,13 +15,6 @@ class Room extends Model
         'size',
         'capacity',
         'bed_type',
-        'services',
-        'tv',
-        'wifi',
-        'air_condition',
-        'heater',
-        'phone',
-        'laundry',
         'adults',
         'image',
     ];
@@ -36,4 +30,8 @@ class Room extends Model
     }
 
 
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'room_service', 'room_id', 'service_id');
+    }
 }

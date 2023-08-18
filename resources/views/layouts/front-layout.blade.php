@@ -15,7 +15,7 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('assets/css/fontawesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/css/elegant-icons.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/css/flaticon.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}" type="text/css">

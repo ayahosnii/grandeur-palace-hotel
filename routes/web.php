@@ -19,4 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms');
+Route::get('/rooms/{id}', [RoomController::class, 'details'])->name('rooms.details');
 Route::get('/api/rooms', [RoomController::class, 'roomsApi'])->name('rooms.api');
+Route::get('/api/services', [RoomController::class, 'servicesApi'])->name('services.api');

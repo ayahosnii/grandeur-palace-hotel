@@ -19,6 +19,9 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
-        "vue-router": "^4.2.4"
+        "@vueform/multiselect": "^2.6.2",
+        "@vuepic/vue-datepicker": "^6.0.0",
+        "vue-router": "^4.2.4",
+        "vue3-daterange-picker": "^1.0.1"
     }
 }
