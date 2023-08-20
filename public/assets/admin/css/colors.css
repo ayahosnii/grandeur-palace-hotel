@@ -447,12 +447,12 @@ input:focus ~ .bg-primary {
         }
       } */
 .btn-primary {
-  border-color: #535BE2 !important;
-  background-color: #666EE8 !important;
+  border-color: #c2a569  !important;
+  background-color: #c2a569 !important;
   color: #FFFFFF; }
   .btn-primary:hover {
-    border-color: #5E66E5 !important;
-    background-color: #7D84EB !important;
+    border-color: #8c764d !important;
+    background-color: #c2a569  !important;
     color: #FFF !important; }
   .btn-primary:focus, .btn-primary:active {
     border-color: #535BE2 !important;
@@ -1811,7 +1811,7 @@ input:focus ~ .bg-info {
   color: #1E9FF2 !important; }
 
 .bg-info {
-  background-color: #c2a569 !important; }
+  background-color: #c2a569  !important; }
   .bg-info .card-header, .bg-info .card-footer {
     background-color: transparent; }
   .bg-info.bg-glow {

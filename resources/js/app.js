@@ -10,6 +10,9 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import VueDatepickerUi from 'vue-datepicker-ui'
 import 'vue-datepicker-ui/lib/vuedatepickerui.css';
 
+import VCalendar from 'v-calendar';
+import 'v-calendar/style.css';
+
 
 
 import {LoadingPlugin} from 'vue-loading-overlay';
@@ -34,8 +37,10 @@ app.component('room-component', RoomComponent);
 app.component('room-filters', RoomFilters);
 app.component('VueDatePicker', VueDatePicker);
 app.component('Datepicker', VueDatepickerUi)
-app.use(LoadingPlugin);
+app.component('VCalendar', VCalendar)
 
+app.use(LoadingPlugin);
+app.use(VCalendar, {})
 
 
 

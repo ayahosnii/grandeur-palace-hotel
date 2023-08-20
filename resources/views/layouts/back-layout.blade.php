@@ -36,6 +36,7 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/style.css')}}">
     <!-- END Custom CSS-->
+    @stack('styles')
 </head>
 <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar"
       data-open="click" data-menu="vertical-menu" data-col="2-columns">
@@ -67,5 +68,6 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="{{asset('assets/admin/js/scripts/pages/dashboard-ecommerce.js')}}" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
+@stack('scripts')
 </body>
 </html>

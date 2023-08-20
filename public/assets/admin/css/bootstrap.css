@@ -1773,8 +1773,8 @@ fieldset:disabled a.btn {
 
 .btn-warning {
   color: #2A2E30;
-  background-color: #FF9149;
-  border-color: #FF9149; }
+  background-color: #8a8989 ;
+  border-color: #8a8989 ; }
   .btn-warning:hover {
     color: #2A2E30;
     background-color: #ff7a23;

@@ -5,8 +5,8 @@
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <a class="navbar-brand" href="index.html">
-                        <img class="brand-logo" alt="modern admin logo" src="../../../app-assets/images/logo/logo.png">
-                        <h3 class="brand-text">Modern Admin</h3>
+                        <img class="brand-logo" alt="modern admin logo" src="{{asset('assets/admin/images/logo.png')}}">
+                        <h3 class="brand-text">grandeur Palace</h3>
                     </a>
                 </li>
                 <li class="nav-item d-md-none">

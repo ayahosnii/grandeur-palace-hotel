@@ -1,5 +1,67 @@
 @extends('layouts.back-layout')
 @section('content')
+    @push('styles')
+        <style lang="scss">
+            .avatar-upload {
+                position: relative;
+                max-width: 205px;
+                margin: 50px auto;
+                .avatar-edit {
+                    position: absolute;
+                    right: 12px;
+                    z-index: 1;
+                    top: 10px;
+                    input {
+                        display: none;
+                        + label {
+                            display: inline-block;
+                            width: 34px;
+                            height: 34px;
+                            margin-bottom: 0;
+                            border-radius: 100%;
+                            background: #FFFFFF;
+                            border: 1px solid transparent;
+                            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+                            cursor: pointer;
+                            font-weight: normal;
+                            transition: all .2s ease-in-out;
+                            &:hover {
+                                background: #f1f1f1;
+                                border-color: #d6d6d6;
+                            }
+                            &:after {
+                                content: "\f040";
+                                font-family: 'FontAwesome';
+                                color: #757575;
+                                position: absolute;
+                                top: 10px;
+                                left: 0;
+                                right: 0;
+                                text-align: center;
+                                margin: auto;
+                            }
+                        }
+                    }
+                }
+                .avatar-preview {
+                    width: 192px;
+                    height: 192px;
+                    position: relative;
+                    border-radius: 100%;
+                    border: 6px solid #F8F8F8;
+                    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+                    > div {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 100%;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                    }
+                }
+            }
+        </style>
+    @endpush
 
 <div class="app-content content">
     <div class="content-wrapper">
@@ -51,25 +113,116 @@
 
                                         <div class="form-body">
 
-                                            <h4 class="form-section"><i class="ft-home"></i> الاسم </h4>
+                                            <h4 class="form-section">
+                                                <i class="ft-home"></i> Add more information about the room
+                                            </h4>
+                                            <div class="form-group">
+                                                <label> صورة المنتج </label>
+                                                <label id="projectinput7" class="file center-block">
+                                                    <div class="avatar-upload">
+                                                        <div class="avatar-edit">
+                                                            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                                                            <label for="imageUpload"></label>
+                                                        </div>
+                                                        <div class="avatar-preview">
+                                                            <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </label>
+                                                {{--@error('image')
+                                                <span class="text-danger">{{$message}}</span>
+                                                @enderror--}}
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput1"> الاسم
+                                                        <label for="projectinput1"> Room Type
                                                         </label>
-                                                        <input type="text" id="name"
+                                                        <input type="text" id="room_type"
                                                                class="form-control"
                                                                placeholder="  "
-                                                               value="{{old('name')}}"
-                                                               name="name">
-{{--                                                        @error("name")--}}
-{{--                                                        <span class="text-danger">{{$message}}</span>--}}
-{{--                                                        @enderror--}}
+                                                               value="{{old('room_type')}}"
+                                                               name="room_type">
+                                                     {{--@error("room_type")
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror--}}
                                                     </div>
                                                 </div>
-
-
-
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1"> Price
+                                                        </label>
+                                                        <input type="text" id="price_per_night"
+                                                               class="form-control"
+                                                               placeholder="  "
+                                                               value="{{old('price_per_night')}}"
+                                                               name="price_per_night">
+                                                     {{--@error("price_per_night")
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror--}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1"> Size
+                                                        </label>
+                                                        <input type="text" id="size"
+                                                               class="form-control"
+                                                               placeholder="  "
+                                                               value="{{old('size')}}"
+                                                               name="size">
+                                                     {{--@error("size")
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror--}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1"> Capacity
+                                                        </label>
+                                                        <input type="text" id="capacity"
+                                                               class="form-control"
+                                                               placeholder="  "
+                                                               value="{{old('capacity')}}"
+                                                               name="capacity">
+                                                     {{--@error("capacity")
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror--}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1"> Bed type
+                                                        </label>
+                                                        <input type="text" id="bed_type"
+                                                               class="form-control"
+                                                               placeholder="  "
+                                                               value="{{old('bed_type')}}"
+                                                               name="bed_type">
+                                                     {{--@error("bed_type")
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror--}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1"> Adults
+                                                        </label>
+                                                        <input type="text" id="adults"
+                                                               class="form-control"
+                                                               placeholder="  "
+                                                               value="{{old('adults')}}"
+                                                               name="adults">
+                                                     {{--@error("adults")
+                                                        <span class="text-danger">{{$message}}</span>
+                                                        @enderror--}}
+                                                    </div>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -98,3 +251,21 @@
 </div>
 
 @stop
+@push('scripts')
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                    $('#imagePreview').hide();
+                    $('#imagePreview').fadeIn(650);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imageUpload").change(function() {
+            readURL(this);
+        });
+    </script>
+@endpush

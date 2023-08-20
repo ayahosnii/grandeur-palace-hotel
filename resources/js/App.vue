@@ -17,7 +17,7 @@
 
         <section class="register" v-if="!hasSeenCongrats">
             <div class="register-icon">
-                <img class="register-icon-item" src="https://vuejs.org/images/logo.png" alt="vue logo">
+                <img class="register-icon-item" :src="`assets/admin/images/logo.png`" alt="vue logo">
 
             </div>
 
@@ -33,21 +33,29 @@
                 <section v-show="step === 1">
                     <form class="form" method="post" action="#" @submit.prevent="next">
                         <div class="form-group">
-
-                            <input type="text" v-model="customer.firstName" autocomplete='customer.firstName' placeholder="First name" />
-                            <input type="text" v-model="customer.lastName" autocomplete='customer.lastName' placeholder="Last name" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 style="text-align: center; color: #ffffff">Choose the Check-in and Out</h2>
+                                </div>
+                                <div class="col-md-12 my-5">
+                                    <VDatePicker
+                                        :columns="columns"
+                                        expanded
+                                        v-model.range="selectedDate"
+                                        @change="handleDateChange"
+                                        mode="dateTime"
+                                        :rules="rules" />
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <input type="tel" v-model="customer.phoneNumber" autocomplete="customer.phoneNumber" placeholder="Phone number" minlength="9" maxlength="10" pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" />
-                        </div>
                     <div class="form-group">
-                        <Datepicker
+<!--                        <Datepicker
                             range
                             v-model="selectedDate"
                             show-picker-inital
                             lang="en"
-                            @change="handleDateChange" />
+                            @change="handleDateChange" />-->
 
                         <div class="cta" data-style="see-through" data-alignment="right" data-text-color="custom">
                             <p class="cta-color">
@@ -65,9 +73,11 @@
                 <section v-show="step === 2">
                     <form class="form" method="post" action="#" @submit.prevent="next">
                         <div class="form-group">
-                            <input type="text" v-model="customer.search" placeholder="Search" />
-                        </div>
-                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 style="text-align: center; color: #ffffff">Choose the rooms</h2>
+                                </div>
+                                <div class="col-md-12 my-5">
                             <Splide v-if="rooms.length > 0" :options="{ rewind: true }" aria-label="Vue Splide Example">
                                 <SplideSlide v-for="(group, index) in groupedRooms" :key="index">
                                     <section class="hp-room-section">
@@ -98,6 +108,8 @@
 
                                 <h2 class="register-title">No room is available</h2>
 
+                            </div>
+                        </div>
                             </div>
                         </div>
 
@@ -244,14 +256,14 @@ export default {
         fetchAvailableRooms() {
             axios.get('/api/check-room-availability', {
                 params: {
-                    check_in: this.selectedDate[0],
-                    check_out: this.selectedDate[1],
+                    check_in: this.selectedDate.start,
+                    check_out: this.selectedDate.end,
                 }
             })
                 .then((response) => {
                     // Code to handle a successful response
-                    console.log(this.selectedDate[0]);
-                    console.log(this.selectedDate[1]);
+                    console.log(this.selectedDate.start);
+                    console.log(this.selectedDate.end);
                     this.rooms = response.data.rooms;
                     console.log(response.data.rooms);
                 })
@@ -312,11 +324,24 @@ export default {
 
 }
 </script>
+<script setup>
+import { useScreens } from 'vue-screen-utils';
+
+const { mapCurrent } = useScreens({
+    xs: '0px',
+    sm: '900px',
+    md: '1000px',
+    lg: '1354px',
+});
+const columns = mapCurrent({ lg: 2 }, 2);
+const expanded = mapCurrent({ lg: false }, true);
+</script>
 <style lang="scss">
 @import "../css/reservation.scss";
 
 .hp-room-items .hp-room-item{
     width: 400px;
+    height: 400px;
 }
 
 .hp-room-section input{
