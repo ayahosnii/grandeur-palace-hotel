@@ -21,13 +21,6 @@ return new class extends Migration
             $table->string('size');
             $table->integer('capacity');
             $table->string('bed_type');
-            $table->text('services');
-            $table->boolean('tv')->default(true);
-            $table->boolean('wifi')->default(true);
-            $table->boolean('air_condition')->default(true);
-            $table->boolean('heater')->default(true);
-            $table->boolean('phone')->default(true);
-            $table->boolean('laundry')->default(false);
             $table->integer('adults')->default(1);
             $table->timestamps();
         });

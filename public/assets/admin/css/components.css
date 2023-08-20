@@ -3,7 +3,7 @@ html {
   height: 100%; }
   html body {
     height: 100%;
-    background-color: #F4F5FA;
+    background-color: #362f29;
     direction: ltr; }
     html body.fixed-navbar {
       padding-top: 5rem; }
@@ -173,8 +173,8 @@ footer.footer-dark {
   position: absolute;
   display: table-cell; }
   .main-menu.menu-light {
-    color: #6B6F82;
-    background: #FFFFFF;
+    color: #ffffff;
+    background: #c2a569;
     border-right: 1px solid #E4E7ED; }
     .main-menu.menu-light .main-menu-header {
       padding: 20px; }
@@ -185,14 +185,14 @@ footer.footer-dark {
         .main-menu.menu-light .main-menu-header .menu-search:focus {
           border-color: #d9d9d9; }
     .main-menu.menu-light .navigation {
-      background: #FFFFFF; }
+      background: #c2a569; }
       .main-menu.menu-light .navigation .navigation-header {
-        color: #6B6F82;
+        color: #ffffff;
         padding: 30px 20px 8px 20px; }
         .main-menu.menu-light .navigation .navigation-header span {
           font-weight: 500; }
       .main-menu.menu-light .navigation li a {
-        color: #6B6F82;
+        color: #ffffff;
         transition: all 0.2s ease; }
         .main-menu.menu-light .navigation li a i, .main-menu.menu-light .navigation li a span {
           transition: all 0.2s ease; }
@@ -237,7 +237,7 @@ footer.footer-dark {
           .main-menu.menu-light .navigation > li .active > a {
             color: #85899b;
             font-weight: 700;
-            background: #f0f0f0; }
+            background: #c2a56959; }
           .main-menu.menu-light .navigation > li .active .hover > a {
             background: whitesmoke; }
         .main-menu.menu-light .navigation > li ul {
@@ -246,7 +246,7 @@ footer.footer-dark {
           font-size: 1rem; }
           .main-menu.menu-light .navigation > li ul li {
             color: #6B6F82;
-            background: transparent; }
+            background: #e2c890; }
             .main-menu.menu-light .navigation > li ul li > a {
               padding: 8px 18px 8px 54px; }
           .main-menu.menu-light .navigation > li ul .has-sub:not(.open) > ul {

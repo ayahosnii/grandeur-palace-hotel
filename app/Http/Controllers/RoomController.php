@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\admin\Room;
+use App\Models\Booking;
 use App\Models\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -16,6 +18,15 @@ class RoomController extends Controller
     public function index()
     {
         return view('rooms');
+    }
+
+    public function create()
+    {
+        return view('admin.rooms.create');
+    }
+    public function reservation()
+    {
+        return view('reservation');
     }
 
     public function details($id)
@@ -36,6 +47,45 @@ class RoomController extends Controller
 
         return response()->json($rooms);
     }
+    public function checkAvailability(Request $request)
+    {
+        $check_in = $request->input('check_in');
+        $check_out = $request->input('check_out');
+
+        $carCheckin = Carbon::parse($check_in);
+        $carCheckout = Carbon::parse($check_out);
+
+        $formCheckIn = $carCheckin->format('Y-m-d H:i:s');
+        $formCheckOut = $carCheckout->format('Y-m-d H:i:s');
+
+
+//
+        $availableRooms = $this->checkRoomAvailability($formCheckIn, $formCheckOut);
+
+        return response()->json(['rooms' => $availableRooms]);
+    }
+
+    public function checkRoomAvailability($formCheckIn, $formCheckOut)
+    {
+        $occupiedRoomIds = Booking::where(function ($query) use ($formCheckIn, $formCheckOut) {
+            $query->where(function ($q) use ($formCheckIn, $formCheckOut) {
+                $q->where('check_in', '<', $formCheckOut)
+                    ->where('check_out', '>', $formCheckIn);
+            });
+        })->pluck('room_id');
+
+        // Get all room IDs
+        $allRoomIds = Room::pluck('id');
+
+        // Calculate available room IDs
+        $availableRoomIds = $allRoomIds->diff($occupiedRoomIds);
+
+        // Get the available rooms
+        $availableRooms = Room::whereIn('id', $availableRoomIds)->get();
+
+        return $availableRooms;
+    }
+
 
    public function servicesApi(Request $request)
    {

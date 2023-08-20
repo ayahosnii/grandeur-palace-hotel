@@ -10,11 +10,11 @@
     <script>
         $(function() {
             $("#price-range").slider({
-                step: 500,
+                step: 10,
                 range: true,
                 min: 0,
-                max: 20000,
-                values: [0, 20000],
+                max: 500,
+                values: [0, 500],
                 slide: function(event, ui)
                 {$("#priceRangeMin").val(ui.values[0]);
                     $("#priceRangeMax").val(ui.values[1]);}

@@ -91,7 +91,7 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="logo">
-                        <a href="./index.html">
+                        <a href="{{url('/')}}">
                             <img src="{{asset('assets/img/logo.svg')}}" alt="">
                         </a>
                     </div>
@@ -100,7 +100,7 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="active"><a href="./index.html">Home</a></li>
+                                <li class="active"><a href="{{url('/')}}">Home</a></li>
                                 <li><a href="{{route('rooms')}}">Rooms</a></li>
                                 <li><a href="./about-us.html">About Us</a></li>
                                 <li><a href="./pages.html">Pages</a>
@@ -113,7 +113,7 @@
                                 </li>
                                 <li><a href="./blog.html">News</a></li>
                                 <li><a href="./contact.html">Contact</a></li>
-                                <li><button href="#" class="bk-btn">Booking Now</button></li>
+                                <li><a href="{{url('/reservation')}}" class="bk-btn">Booking Now</a></li>
                             </ul>
                         </nav>
                     </div>

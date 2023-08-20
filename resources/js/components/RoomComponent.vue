@@ -41,7 +41,7 @@
                                     <table>
                                         <!-- Your table content -->
                                     </table>
-                                    <button href="#">More Details</button>
+                                    <a :href="'/rooms/' + room.id">More Details</a>
                                 </div>
                             </div>
                         </div>
@@ -64,6 +64,7 @@
 <script>
 import { fetchRooms } from '../utils/api';
 import RoomFilterComponent from '../components/RoomFilters.vue';
+
 
     export default {
         props: {
@@ -93,7 +94,7 @@ import RoomFilterComponent from '../components/RoomFilters.vue';
         },
 
         components:{
-            RoomFilterComponent
+            RoomFilterComponent,
         }
         }
 

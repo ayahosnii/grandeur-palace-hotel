@@ -1396,7 +1396,7 @@ ul, ol {
 	height: 350px;
 }
 .room-item .ri-text {
-	border: 1px solid #ebebeb;
+	border: 1px solid #d6b770;
 	border-top: none;
 	padding: 24px 24px 30px 28px;
 }
@@ -1516,22 +1516,22 @@ ul, ol {
 	font-family: "Cabin", sans-serif;
 	font-size: 16px;
 	font-weight: 400;
-	color: #19191a;
+	color: #afa291;
 }
 .room-details-item .rd-text table {
 	margin-bottom: 32px;
 }
 .room-details-item .rd-text table tbody tr td {
 	font-size: 16px;
-	color: #19191a;
+	color: #d4d4e6;
 	line-height: 36px;
 }
 .room-details-item .rd-text table tbody tr td.r-o {
 	width: 120px;
-	color: #707079;
+	color: #d6b770;
 }
 .room-details-item .rd-text p {
-	color: #707079;
+	color: #d4d4e6;
 }
 .room-details-item .rd-text p.f-para {
 	margin-bottom: 22px;
@@ -1542,7 +1542,7 @@ ul, ol {
 	margin-bottom: 50px;
 }
 .rd-reviews h4 {
-	color: #19191a;
+	color: #d6b770;
 	letter-spacing: 1px;
 	margin-bottom: 45px;
 }
@@ -1587,12 +1587,12 @@ ul, ol {
 	color: #f5b917;
 }
 .rd-reviews .review-item .ri-text h5 {
-	color: #19191a;
+	color: #d6b770;
 	margin-top: 4px;
 	margin-bottom: 8px;
 }
 .rd-reviews .review-item .ri-text p {
-	color: #707079;
+	color: #d4d4e6;
 	margin-bottom: 0;
 }
 .review-add h4 {

@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="check-date">
                 <label for="date-out">Check in-Out:</label>
-                <VueDatePicker v-model="date" range />
+                <VueDatePicker v-model="date" range @change="handleDateChange"/>
 
             </div>
         </div>
@@ -14,10 +14,12 @@
             <div id="price-range" class="slider"></div>
             <div class="row">
                 <div class="col-md-6">
-                    <input type="text" class="price-input" id="priceRangeMin" v-model="selectedPriceMin" readonly>
+                    <input type="text" class="price-input" id="priceRangeMin"
+                           v-model="selectedPriceMin" @change="handleMinChange" readonly>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="price-input" id="priceRangeMax" v-model="selectedPriceMax" readonly>
+                    <input type="text" class="price-input" id="priceRangeMax"
+                           v-model="selectedPriceMax" @change="handleMinChange" readonly>
                 </div>
             </div>
 
@@ -92,7 +94,7 @@ export default {
             selectedRoomType: '',
             selectedadults: '',
             selectedPriceMin: 0,
-            selectedPriceMax: 20000,
+            selectedPriceMax: 500,
             selectedServices: [],
             options: [],
             selectedCheck: '',
@@ -112,6 +114,10 @@ export default {
         this.$emit('filtered-rooms', this.filteredRooms);
     },
     watch: {
+        date(newDate){
+            console.log('selectedDate changed:', newDate);
+            this.fetchAvailableRooms();
+        },
         computedRooms: {
             immediate: true,
             handler(newValue) {
@@ -152,14 +158,32 @@ export default {
                 this.updateComputedRooms();
             }
         },
-        date: {
-            immediate: true,
-            handler() {
-                this.updateComputedRooms();
-            }
-        }
     },
     methods: {
+        fetchAvailableRooms() {
+            axios.get('/api/check-room-availability', {
+                params: {
+                    check_in: this.date[0],
+                    check_out: this.date[1],
+                }
+            })
+                .then((response) => {
+                    // Code to handle a successful response
+                    console.log(this.date[0]);
+                    console.log(this.date[1]);
+                    this.rooms = response.data.rooms;
+                    console.log(response.data.rooms);
+                })
+                .catch((error) => {
+                    // Code to handle an error response
+                    console.error(error);
+                });
+        },
+
+        handleDateChange(newDate) {
+            this.date = newDate;
+        },
+
         updateComputedRooms() {
             const filtered = this.computedRooms;
             this.filteredRooms = filtered;
@@ -203,16 +227,13 @@ export default {
                     matches = false;
                 }
 
-                if (this.selectedPriceMin !== null && this.selectedPriceMax !== null) {
-                    if (
-                        room.price_per_night < parseFloat(this.selectedPriceMin) ||
-                        room.price_per_night > parseFloat(this.selectedPriceMax)
-
-                    ) {
+                if (this.selectedPriceMin && room.price_per_night < parseFloat(this.selectedPriceMin)) {
+                    console.log(this.selectedPriceMin)
                         matches = false;
                     }
-                }
 
+
+/*
                 if (this.selectedServices && this.selectedServices.length > 0) {
                     const serviceNames = room.services.map((service) => service.name);
                     const hasSelectedServices = this.selectedServices.every((serviceName) =>
@@ -223,6 +244,7 @@ export default {
                         matches = false;
                     }
                 }
+*/
 
                 return matches;
             });
