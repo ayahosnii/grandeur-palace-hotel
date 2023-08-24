@@ -454,7 +454,7 @@ ul, ol {
 	margin-right: 42px;
 	font-weight: 500;
 	display: inline-block;
-	padding: 27px 0;
+	padding: -2px 0;
 	position: relative;
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
@@ -1483,7 +1483,7 @@ ul, ol {
 	margin-bottom: 8px;
 }
 .room-details-item .rd-text .rd-title h3 {
-	color: #19191a;
+	color: #ffffff;
 	float: left;
 }
 .room-details-item .rd-text .rd-title .rdt-right {
@@ -1498,7 +1498,7 @@ ul, ol {
 .room-details-item .rd-text .rd-title .rdt-right .rating i {
 	color: #f5b917;
 }
-.room-details-item .rd-text .rd-title .rdt-right a {
+.room-details-item .rd-text .rd-title .rdt-right button {
 	display: inline-block;
 	color: #ffffff;
 	font-size: 13px;

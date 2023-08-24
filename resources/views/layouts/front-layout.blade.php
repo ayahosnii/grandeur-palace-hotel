@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/jquery-ui.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" type="text/css">
 </head>
 
@@ -59,7 +60,7 @@
     </div>
     <nav class="mainmenu mobile-menu" id="mainmenu">
         <ul>
-            <li class="active"><a href="./index.html">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="{{route('rooms')}}">Rooms</a></li>
             <li><a href="./about-us.html">About Us</a></li>
             <li><a href="./pages.html">Pages</a>
@@ -181,6 +182,7 @@
 <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.slicknav.js')}}"></script>
 <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
 <script>
     window.addEventListener('scroll', function() {

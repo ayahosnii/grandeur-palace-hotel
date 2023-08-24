@@ -192,7 +192,7 @@ export default {
             isLoading: true,
             fullPage: true,
             calendarData: {},
-            asset: 'assets/img/room/',
+            asset: 'assets/admin/images/room_images',
             selectedDate: [
                 new Date(),
                 new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)],

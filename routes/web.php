@@ -21,6 +21,10 @@ Route::get('/', function () {
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms');
 Route::get('/reservation', [RoomController::class, 'reservation'])->name('reservation');
 Route::get('/rooms/{id}', [RoomController::class, 'details'])->name('rooms.details');
-Route::get('/api/rooms', [RoomController::class, 'roomsApi'])->name('rooms.api');
+
+Route::get('/api/bookings', [RoomController::class, 'bookingsApi'])->name('bookings.api');
+Route::get('/api/all-bookings', [RoomController::class, 'allBookingsApi'])->name('all.bookings.api');
+Route::get('/api/rooms', [RoomController::class, 'roomsApi'])->name('rooms.details.api');
+Route::get('/api/rooms-details', [RoomController::class, 'roomsDetailsApi'])->name('rooms.api');
 Route::get('/api/check-room-availability', [RoomController::class, 'checkAvailability'])->name('rooms.checkAvailability.api');
 Route::get('/api/services', [RoomController::class, 'servicesApi'])->name('services.api');

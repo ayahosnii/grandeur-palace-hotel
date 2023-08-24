@@ -8,7 +8,7 @@
                     <div class="breadcrumb-text">
                         <h2>Our Rooms</h2>
                         <div class="bt-option">
-                            <a href="./home.html">Home</a>
+                            <a  href="./home.html">Home</a>
                             <span>Rooms</span>
                         </div>
                     </div>
@@ -38,10 +38,17 @@
                                 <div class="ri-text">
                                     <h4>{{ room.room_type }}</h4>
                                     <h3>{{ room.price_per_night }}<span>/Pernight</span></h3>
+                                    <p style="color: #d5d4d4">Services:
+                                        <span>
+                                            <i style="padding: 0px 5px;" v-for="room in room.services"
+                                               :class="room.icon_class"></i>
+                                        </span>
+                                    </p>
+
                                     <table>
                                         <!-- Your table content -->
                                     </table>
-                                    <a :href="'/rooms/' + room.id">More Details</a>
+                                    <a class="room-btn" :href="'/rooms/' + room.id">More Details</a>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +83,7 @@ import RoomFilterComponent from '../components/RoomFilters.vue';
             data() {
                 return {
                     rooms: [],
-                    asset: 'assets/img/room/',
+                    asset: 'assets\\admin\\images\\room_images',
                     filteredRooms: [],
                 };
             },
@@ -99,3 +106,14 @@ import RoomFilterComponent from '../components/RoomFilters.vue';
         }
 
 </script>
+<style>
+.room-btn{
+    display: inline-block;
+    color: #ffffff;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: #d6b770;
+    padding: 14px 28px 13px
+}
+</style>

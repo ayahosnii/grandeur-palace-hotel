@@ -30,3 +30,12 @@ export async function fetchServices() {
         return [];
     }
 }
+export async function fetchBookings() {
+    try {
+        const response = await axios.get('/api/bookings');
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}

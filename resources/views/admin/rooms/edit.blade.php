@@ -6,9 +6,6 @@
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/vendors/css/forms/icheck/custom.css')}}">
 
         <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/css/plugins/forms/checkboxes-radios.css')}}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
-
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
 
         <style lang="scss">
             .avatar-upload {
@@ -112,20 +109,16 @@
                                 @include('admin.sections.alerts.success')
                                 @include('admin.sections.alerts.errors')
                                 <div class="card-body">
-                                    <form class="form"
-                                          action="{{route('admin.rooms.store')}}"
-                                          method="POST"
-                                          enctype="multipart/form-data">
+                                    <form class="form" action="{{ route('admin.rooms.update', ['id' => $room->id]) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-
+                                        @method('PUT') <!-- This is required to specify the HTTP method as PUT for updating -->
 
                                         <div class="form-body">
-
                                             <h4 class="form-section">
-                                                <i class="ft-home"></i> Add more information about the room
+                                                <i class="ft-home"></i> Edit Room Information
                                             </h4>
                                             <div class="form-group">
-                                                <label> صورة المنتج </label>
+                                                <label>Room Image</label>
                                                 <label id="projectinput7" class="file center-block">
                                                     <div class="avatar-upload">
                                                         <div class="avatar-edit">
@@ -133,102 +126,72 @@
                                                             <label for="imageUpload"></label>
                                                         </div>
                                                         <div class="avatar-preview">
-                                                            <div id="imagePreview" style="background-image: url(http://127.0.0.1:8000/assets/admin/images/logo.png);">
+                                                            <div id="imagePreview" style="background-image: url({{ asset('path_to_existing_image.jpg') }});">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </label>
-                                                {{--@error('image')
-                                                <span class="text-danger">{{$message}}</span>
-                                                @enderror--}}
+                                                {{-- @error('image')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror --}}
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput1"> Room Type
-                                                        </label>
-                                                        <input type="text" id="room_type"
-                                                               class="form-control"
-                                                               placeholder="  "
-                                                               value="{{old('room_type')}}"
-                                                               name="room_type">
-                                                     {{--@error("room_type")
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        <label for="room_type">Room Type</label>
+                                                        <input type="text" id="room_type" class="form-control" placeholder="Room Type" value="{{ $room->room_type }}" name="room_type">
+                                                        {{-- @error("room_type")
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput1"> Price
-                                                        </label>
-                                                        <input type="text" id="price_per_night"
-                                                               class="form-control"
-                                                               placeholder="  "
-                                                               value="{{old('price_per_night')}}"
-                                                               name="price_per_night">
-                                                     {{--@error("price_per_night")
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        <label for="price_per_night">Price</label>
+                                                        <input type="text" id="price_per_night" class="form-control" placeholder="Price" value="{{ $room->price_per_night }}" name="price_per_night">
+                                                        {{-- @error("price_per_night")
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror --}}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput1"> Size
-                                                        </label>
-                                                        <input type="text" id="size"
-                                                               class="form-control"
-                                                               placeholder="  "
-                                                               value="{{old('size')}}"
-                                                               name="size">
-                                                     {{--@error("size")
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        <label for="size">Size</label>
+                                                        <input type="text" id="size" class="form-control" placeholder="Size" value="{{ $room->size }}" name="size">
+                                                        {{-- @error("size")
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput1"> Capacity
-                                                        </label>
-                                                        <input type="text" id="capacity"
-                                                               class="form-control"
-                                                               placeholder="  "
-                                                               value="{{old('capacity')}}"
-                                                               name="capacity">
-                                                     {{--@error("capacity")
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        <label for="capacity">Capacity</label>
+                                                        <input type="text" id="capacity" class="form-control" placeholder="Capacity" value="{{ $room->capacity }}" name="capacity">
+                                                        {{-- @error("capacity")
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror --}}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput1"> Bed type
-                                                        </label>
-                                                        <input type="text" id="bed_type"
-                                                               class="form-control"
-                                                               placeholder="  "
-                                                               value="{{old('bed_type')}}"
-                                                               name="bed_type">
-                                                     {{--@error("bed_type")
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        <label for="bed_type">Bed Type</label>
+                                                        <input type="text" id="bed_type" class="form-control" placeholder="Bed Type" value="{{ $room->bed_type }}" name="bed_type">
+                                                        {{-- @error("bed_type")
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror --}}
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="projectinput1"> Adults
-                                                        </label>
-                                                        <input type="text" id="adults"
-                                                               class="form-control"
-                                                               placeholder="  "
-                                                               value="{{old('adults')}}"
-                                                               name="adults">
-                                                     {{--@error("adults")
-                                                        <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        <label for="adults">Adults</label>
+                                                        <input type="text" id="adults" class="form-control" placeholder="Adults" value="{{ $room->adults }}" name="adults">
+                                                        {{-- @error("adults")
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,25 +203,22 @@
                                                             @foreach($services as $id => $name)
                                                                 <div class="col-md-6 col-sm-12">
                                                                     <fieldset>
-                                                                        <input type="checkbox" name="services[]" id="service-{{ $id }}" value="{{ $id }}">
+                                                                        <input type="checkbox" name="services[]" id="service-{{ $id }}" value="{{ $id }}" {{ in_array($id, $selectedServiceIds) ? 'checked' : '' }}>
                                                                         <label for="service-{{ $id }}">{{ $name }}</label>
                                                                     </fieldset>
                                                                 </div>
-                                                            @endforeach                                                        </div>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-
-
                                         <div class="form-actions">
-                                            <button type="button" class="btn btn-warning mr-1"
-                                                    onclick="history.back();">
-                                                <i class="ft-x"></i> تراجع
+                                            <button type="button" class="btn btn-warning mr-1" onclick="history.back();">
+                                                <i class="ft-x"></i> Cancel
                                             </button>
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="la la-check-square-o"></i> تحديث
+                                                <i class="la la-check-square-o"></i> Update
                                             </button>
                                         </div>
                                     </form>
@@ -294,7 +254,5 @@
     <script src="{{asset('assets/admin/vendors/js/forms/icheck/icheck.min.js')}}" type="text/javascript"></script>
 
     <script src="{{asset('assets/admin/js/scripts/forms/checkbox-radio.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/admin/js/scripts/extensions/dropzone.js')}}" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
 
 @endpush

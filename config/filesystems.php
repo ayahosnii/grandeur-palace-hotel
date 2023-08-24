@@ -44,6 +44,14 @@ return [
             'throw' => false,
         ],
 
+        'room_images' => [
+            'driver' => 'local',
+            'root' => public_path('assets/admin/images/'),
+            'url' => env('APP_URL').'/assets/admin/images/',
+            'visibility' => 'public',
+        ],
+
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

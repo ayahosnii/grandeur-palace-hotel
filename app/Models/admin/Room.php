@@ -23,7 +23,7 @@ class Room extends Model
     public function getImageUrlAttribute()
     {
         if ($this->image) {
-            return asset('assets/img/room/' . $this->image);
+            return asset('assets/admin/images/room_images/' . $this->image);
         }
 
         return null;
@@ -33,5 +33,10 @@ class Room extends Model
     public function services()
     {
         return $this->belongsToMany(Service::class, 'room_service', 'room_id', 'service_id');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

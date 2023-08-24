@@ -1,8 +1,14 @@
 import './bootstrap';
 import { createApp } from 'vue';
+import { Modal } from '@kouts/vue-modal'
+import '@kouts/vue-modal/dist/vue-modal.css'
+
 import ExampleComponent from './components/ExampleComponent.vue';
+import CalendarComponent from './components/CalendarComponent.vue';
 import RoomComponent from './components/RoomComponent.vue';
+import RoomDetailsComponent from "./components/RoomDetailsComponent.vue";
 import RoomFilters from './components/RoomFilters.vue';
+import FullCalendarComponent from './components/FullCalendarComponent.vue';
 import Main from './App.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
@@ -34,10 +40,16 @@ const app = createApp({});
 app.component('example-component', ExampleComponent);
 app.component('main-component', Main);
 app.component('room-component', RoomComponent);
+app.component('room-details-component', RoomDetailsComponent);
 app.component('room-filters', RoomFilters);
+app.component('calendar-component', CalendarComponent);
+app.component('fullcalendar-component', FullCalendarComponent);
 app.component('VueDatePicker', VueDatePicker);
 app.component('Datepicker', VueDatepickerUi)
 app.component('VCalendar', VCalendar)
+//app.component('star-rating', VueStarRating.default);
+app.component('Modal', Modal)
+
 
 app.use(LoadingPlugin);
 app.use(VCalendar, {})
