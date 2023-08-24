@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\admin\Room;
 use App\Models\Booking;
+use App\Models\Review;
 use App\Models\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -57,6 +58,37 @@ class RoomController extends Controller
         return response()->json($rooms);
     }
 
+    public function storeReviews(Request $request)
+    {
+        $request->validate([
+            'bookingCode' => 'required|string|max:5',
+            'rating' => 'required|integer|min:1|max:5',
+            'reviewText' => 'required|string',
+        ]);
+
+        $booking = Booking::where('booking_code', $request->input('bookingCode'))->first();
+
+        if (!$booking) {
+            return response()->json(['error' => 'Booking not found'], 404);
+        }
+
+        $existingReview = Review::where('booking_code', $request->input('bookingCode'))->first();
+
+        if ($existingReview) {
+            return response()->json(['error' => 'You have already reviewed with this booking code'], 400);
+        }
+
+        $review = new Review([
+            'booking_id' => $booking->id,
+            'booking_code' => $request->input('bookingCode'),
+            'rating' => $request->input('rating'),
+            'review_text' => $request->input('reviewText'),
+        ]);
+
+        $booking->reviews()->save($review);
+
+        return response()->json(['message' => 'Review submitted successfully']);
+    }
     public function bookingsApi(Request $request)
     {
         $id = $request->input('roomId');

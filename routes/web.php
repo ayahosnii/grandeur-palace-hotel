@@ -26,5 +26,6 @@ Route::get('/api/bookings', [RoomController::class, 'bookingsApi'])->name('booki
 Route::get('/api/all-bookings', [RoomController::class, 'allBookingsApi'])->name('all.bookings.api');
 Route::get('/api/rooms', [RoomController::class, 'roomsApi'])->name('rooms.details.api');
 Route::get('/api/rooms-details', [RoomController::class, 'roomsDetailsApi'])->name('rooms.api');
+Route::post('/api/storeReviews', [RoomController::class, 'storeReviews'])->name('rooms.store.reviews');
 Route::get('/api/check-room-availability', [RoomController::class, 'checkAvailability'])->name('rooms.checkAvailability.api');
 Route::get('/api/services', [RoomController::class, 'servicesApi'])->name('services.api');

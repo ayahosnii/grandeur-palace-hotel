@@ -189,7 +189,7 @@
                                             <StarRating :star-size="25"/>
                                         </div>
                                     </div>
-                                    <textarea placeholder="Your Review"></textarea>
+                                    <textarea v-model="newComment" placeholder="Your Review"></textarea>
                                     <button type="submit">Submit Now</button>
                                 </div>
                             </div>
@@ -232,6 +232,7 @@ export default {
     data() {
         return {
             room: {},
+            newComment: '',
             selectedDate: [
                 new Date(),
                 new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)],
@@ -286,8 +287,6 @@ export default {
                 });
         },
 
-
-
         handleDateChange(newDate) {
             this.selectedDate = newDate;
             this.checkInDate = this.selectedDate[0];
@@ -308,6 +307,10 @@ export default {
                     console.error('Error checking room availability:', error);
                 });
         },
+
+        postStoreReviews() {
+            axios.post('/api/storeReviews')
+        }
     },
 }
 
