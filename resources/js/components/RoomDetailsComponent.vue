@@ -186,7 +186,7 @@
                                     <div>
                                         <h5>You Rating:</h5>
                                         <div class="rating">
-                                            <StarRating :star-size="15"/>
+                                            <StarRating :star-size="25"/>
                                         </div>
                                     </div>
                                     <textarea placeholder="Your Review"></textarea>
