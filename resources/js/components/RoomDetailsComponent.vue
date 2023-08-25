@@ -23,12 +23,12 @@
                         <div class="room-details-img" style="margin: 50px">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <img :src="'http://localhost:8000/assets/admin/images/room_images/' +room.image" alt="">
+                                    <img :src="'/assets/admin/images/room_images/' +room.image" alt="">
                                 </div>
                                 <div class="col-md-6">
                                     <Splide v-if="room.images.length > 0" :options="{ rewind: true }" aria-label="Vue Splide Example">
                                         <SplideSlide v-for="(image, index) in room.images" :key="index">
-                                            <img :src="'http://localhost:8000/assets/admin/images/room_images/' + image.image_path" :alt="image.id">
+                                            <img :src="'/assets/admin/images/room_images/' + image.image_path" :alt="image.id">
                                         </SplideSlide>
                                     </Splide>
                                 </div>
@@ -119,7 +119,7 @@
                         <h4>Reviews</h4>
                         <div class="review-item" v-for="client in clients" :key="client.id">
                             <div class="ri-pic">
-                                <img :key="client.id" src="http://localhost:8000/assets/img/room/avatar/456322.webp" alt="">
+                                <img :key="client.id" src="/assets/img/room/avatar/456322.webp" alt="">
                             </div>
                             <div class="ri-text">
                                 <h5>{{ client.firstname }} {{ client.lastname }}</h5>
