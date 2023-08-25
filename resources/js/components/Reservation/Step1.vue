@@ -64,7 +64,7 @@ export default {
     },
     methods: {
         fetchAvailableRooms() {
-            axios.get('/api/check-room-availability', {
+            axios.get('/api/check-rooms-availability', {
                 params: {
                     check_in: this.selectedDate.start,
                     check_out: this.selectedDate.end,
@@ -85,9 +85,9 @@ export default {
 
 
 
-        checkRoomAvailability() {
+        checkRoomsAvailability() {
             axios
-                .get('/api/check-room-availability', {
+                .get('/api/check-rooms-availability', {
                     params: {
                         checkInDate: this.checkInDate,
                         checkOutDate: this.checkOutDate,

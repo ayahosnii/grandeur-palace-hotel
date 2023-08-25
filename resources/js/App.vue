@@ -29,7 +29,7 @@
                 <div class="step" :class="{'step-active' : step === 3, 'step-done': step > 3}"><span class="step-number">3</span></div>
             </div>
 
-            <transition name="slide-fade">
+            <transition name="slide-fade" style="width: auto">
                 <section v-show="step === 1">
                     <form class="form" method="post" action="#" @submit.prevent="next">
                         <div class="form-group">
@@ -254,7 +254,7 @@ export default {
             console.log('User cancelled the loader.')
         },
         fetchAvailableRooms() {
-            axios.get('/api/check-room-availability', {
+            axios.get('/api/check-rooms-availability', {
                 params: {
                     check_in: this.selectedDate.start,
                     check_out: this.selectedDate.end,
@@ -280,9 +280,9 @@ export default {
                 // Update the selectedDate with the new value
                 this.selectedDate = newDate;
             },
-        checkRoomAvailability() {
+        checkRoomsAvailability() {
             axios
-                .get('/api/check-room-availability', {
+                .get('/api/check-rooms-availability', {
                     params: {
                         checkInDate: this.checkInDate,
                         checkOutDate: this.checkOutDate,

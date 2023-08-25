@@ -161,7 +161,7 @@ export default {
     },
     methods: {
         fetchAvailableRooms() {
-            axios.get('/api/check-room-availability', {
+            axios.get('/api/check-rooms-availability', {
                 params: {
                     check_in: this.date[0],
                     check_out: this.date[1],

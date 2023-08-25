@@ -12,7 +12,7 @@ export async function fetchRooms(filters) {
 
 export async function fetchAvailableRooms(filters) {
     try {
-        const response = await axios.get('/api/check-room-availability', { params: this.selectedDate });
+        const response = await axios.get('/api/check-rooms-availability', { params: this.selectedDate });
         return response.data;
     } catch (error) {
         console.error(error);

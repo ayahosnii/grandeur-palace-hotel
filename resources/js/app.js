@@ -19,7 +19,8 @@ import 'vue-datepicker-ui/lib/vuedatepickerui.css';
 import VCalendar from 'v-calendar';
 import 'v-calendar/style.css';
 
-
+import ToastPlugin from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-bootstrap.css';
 
 import {LoadingPlugin} from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
@@ -47,6 +48,7 @@ app.component('fullcalendar-component', FullCalendarComponent);
 app.component('VueDatePicker', VueDatePicker);
 app.component('Datepicker', VueDatepickerUi)
 app.component('VCalendar', VCalendar)
+app.use(ToastPlugin);
 //app.component('star-rating', VueStarRating.default);
 app.component('Modal', Modal)
 

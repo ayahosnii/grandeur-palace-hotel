@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\admin\Room;
 use App\Models\Booking;
+use App\Models\Client;
+use App\Models\Customer;
 use App\Models\Review;
 use App\Models\Service;
 use Carbon\Carbon;
@@ -49,6 +51,20 @@ class RoomController extends Controller
         return response()->json($rooms);
     }
 
+    public function reviewsApi(Request $request)
+    {
+        $clientsWithReviews = Customer::whereHas('bookings.reviews')->with('bookings.reviews')->get();
+
+        $averageRatingForAll = $clientsWithReviews->flatMap(function ($customer) {
+            return $customer->bookings->flatMap->reviews->pluck('rating')->avg();
+        });
+
+        return response()->json([
+            'customersWithReviews' => $clientsWithReviews,
+            'averageRatingForAll' => $averageRatingForAll,
+        ]);
+    }
+
     public function roomsDetailsApi(Request $request)
     {
         $id = $request->input('roomId');
@@ -60,16 +76,21 @@ class RoomController extends Controller
 
     public function storeReviews(Request $request)
     {
+        /*return response()->json($request->input('rating'));
         $request->validate([
             'bookingCode' => 'required|string|max:5',
             'rating' => 'required|integer|min:1|max:5',
             'reviewText' => 'required|string',
-        ]);
+        ]);*/
 
         $booking = Booking::where('booking_code', $request->input('bookingCode'))->first();
 
         if (!$booking) {
             return response()->json(['error' => 'Booking not found'], 404);
+        }
+
+        if ($booking->room_id !== $request->input('roomId')) {
+            return response()->json(['error' => 'You booked another room'], 400);
         }
 
         $existingReview = Review::where('booking_code', $request->input('bookingCode'))->first();
@@ -78,11 +99,12 @@ class RoomController extends Controller
             return response()->json(['error' => 'You have already reviewed with this booking code'], 400);
         }
 
+
         $review = new Review([
             'booking_id' => $booking->id,
             'booking_code' => $request->input('bookingCode'),
             'rating' => $request->input('rating'),
-            'review_text' => $request->input('reviewText'),
+            'review_text' => $request->input('newComment'),
         ]);
 
         $booking->reviews()->save($review);
@@ -116,12 +138,12 @@ class RoomController extends Controller
 
 
 //
-        $availableRooms = $this->checkRoomAvailability($formCheckIn, $formCheckOut);
+        $availableRooms = $this->checkRoomsAvailability($formCheckIn, $formCheckOut);
 
         return response()->json(['rooms' => $availableRooms]);
     }
 
-    public function checkRoomAvailability($formCheckIn, $formCheckOut)
+    public function checkRoomsAvailability($formCheckIn, $formCheckOut)
     {
         $occupiedRoomIds = Booking::where(function ($query) use ($formCheckIn, $formCheckOut) {
             $query->where(function ($q) use ($formCheckIn, $formCheckOut) {
@@ -140,6 +162,43 @@ class RoomController extends Controller
         $availableRooms = Room::whereIn('id', $availableRoomIds)->get();
 
         return $availableRooms;
+    }
+
+    public function checkTheRoomAvailability(Request $request)
+    {
+        $roomId = $request->input('roomId');
+        $checkIn = Carbon::parse($request->input('check_in'));
+        $checkOut = Carbon::parse($request->input('check_out'));
+
+        $now = Carbon::now();
+
+        if ($checkIn <= $now || $checkOut <= $now) {
+            return response()->json(['message' => 'You can\'t check this room. Check-in or check-out is in the past.']);
+        }
+
+        $bookingsForRoom = Booking::where('room_id', $roomId)->get();
+
+        // Check if the room is available for the requested dates
+        $isRoomAvailable = true;
+
+        foreach ($bookingsForRoom as $booking) {
+            $bookingCheckIn = Carbon::parse($booking->check_in);
+            $bookingCheckOut = Carbon::parse($booking->check_out);
+
+            if (
+                $checkIn >= $bookingCheckIn && $checkIn < $bookingCheckOut ||
+                $checkOut > $bookingCheckIn && $checkOut <= $bookingCheckOut
+            ) {
+                $isRoomAvailable = false;
+                break;
+            }
+        }
+
+        if ($isRoomAvailable) {
+            return response()->json(['message' => 'This room is available']);
+        } else {
+            return response()->json(['message' => 'This room is not available']);
+        }
     }
 
 
