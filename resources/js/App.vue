@@ -31,12 +31,11 @@
 
             <transition name="slide-fade" style="width: auto">
                 <section v-show="step === 1">
-                    <h2 style="text-align: center; color: #ffffff">Choose the Check-in and Out</h2>
                     <form class="form" method="post" action="#" @submit.prevent="next">
-
                         <h2 style="text-align: center; color: #ffffff">Choose the Check-in and Out</h2>
                         <div class="responsive-datepicker">
                             <VDatePicker
+                                expanded
                                 v-model.range="selectedDate"
                                 @change="handleDateChange"
                                 mode="dateTime"

@@ -49,6 +49,7 @@
                                         <form @submit.prevent="bookRoom">
                                             <div class="form-group">
                                                 <VDatePicker
+                                                    :columns="columns"
                                                     v-model.range="selectedDate"
                                                     @change="handleDateChange"
                                                     mode="dateTime"
