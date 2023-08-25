@@ -350,7 +350,7 @@ export default {
 
 
             axios
-                .post('http://127.0.0.1:8000/api/storeReviews', {
+                .post('/api/storeReviews', {
                     bookingCode: this.bookingCode,
                     rating: this.rating,
                     newComment: this.newComment,
