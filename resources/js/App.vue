@@ -31,41 +31,29 @@
 
             <transition name="slide-fade" style="width: auto">
                 <section v-show="step === 1">
+                    <h2 style="text-align: center; color: #ffffff">Choose the Check-in and Out</h2>
                     <form class="form" method="post" action="#" @submit.prevent="next">
+
+                        <h2 style="text-align: center; color: #ffffff">Choose the Check-in and Out</h2>
+                        <div class="responsive-datepicker">
+                            <VDatePicker
+                                v-model.range="selectedDate"
+                                @change="handleDateChange"
+                                mode="dateTime"
+                                :rules="rules"
+                            />
+                        </div>
+
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2 style="text-align: center; color: #ffffff">Choose the Check-in and Out</h2>
-                                </div>
-                                <div class="col-md-12 my-5">
-                                    <VDatePicker
-                                        :columns="columns"
-                                        expanded
-                                        v-model.range="selectedDate"
-                                        @change="handleDateChange"
-                                        mode="dateTime"
-                                        :rules="rules" />
-                                </div>
+                            <div class="cta" data-style="see-through" data-alignment="right" data-text-color="custom">
+                                <p class="cta-color">
+              <span class="link_wrap">
+                <input type="submit" value="Next" class="link_text" />
+                <span class="arrow-next"></span>
+              </span>
+                                </p>
                             </div>
                         </div>
-
-                    <div class="form-group">
-<!--                        <Datepicker
-                            range
-                            v-model="selectedDate"
-                            show-picker-inital
-                            lang="en"
-                            @change="handleDateChange" />-->
-
-                        <div class="cta" data-style="see-through" data-alignment="right" data-text-color="custom">
-                            <p class="cta-color">
-							<span class="link_wrap">
-								<input type="submit" value="Next" class="link_text" />
-								<span class="arrow-next"></span>
-							</span>
-                            </p>
-                        </div>
-                    </div>
                     </form>
                 </section>
             </transition>
@@ -363,5 +351,9 @@ const expanded = mapCurrent({ lg: false }, true);
     border: solid rgba(161, 127, 58, 0.89);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+}
+
+.responsive-datepicker {
+    width: 100%; /* Make the date picker take 100% width of its container */
 }
 </style>
