@@ -55,16 +55,34 @@ class RoomController extends Controller
     {
         $roomId = $request->input('roomId');
 
-        $clientsWithReviews = Customer::whereHas('bookings.reviews', function ($query) use ($roomId) {
+        $filteredCustomers = Customer::whereHas('bookings.reviews', function ($query) use ($roomId) {
             $query->where('room_id', $roomId);
-        })->with('bookings.reviews')->get();
-        $averageRatingForAll = $clientsWithReviews->flatMap(function ($customer) {
-            return $customer->bookings->flatMap->reviews->pluck('rating')->avg();
-        });
+        })
+            ->with('bookings.reviews')
+            ->get();
+
+        $totalRating = 0;
+        $totalReviews = 0;
+
+        foreach ($filteredCustomers as $customer) {
+            foreach ($customer->bookings as $booking) {
+                foreach ($booking->reviews as $review) {
+                    // Sum up the ratings and count the reviews
+                    $totalRating += $review->rating;
+                    $totalReviews++;
+                }
+            }
+        }
+
+        if ($totalReviews > 0) {
+            $averageRating = $totalRating / $totalReviews;
+        } else {
+            $averageRating = 0;
+        }
 
         return response()->json([
-            'customersWithReviews' => $clientsWithReviews,
-            'averageRatingForAll' => $averageRatingForAll,
+            'customersWithReviews' => $filteredCustomers,
+            'averageRatingForAll' => $averageRating,
         ]);
     }
 

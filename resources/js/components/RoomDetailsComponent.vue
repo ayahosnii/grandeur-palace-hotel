@@ -41,7 +41,8 @@
                                 <h3>{{ room.room_type }}</h3>
                                 <div class="rdt-right">
                                     <div class="rating" >
-                                        <StarRating :rating="4" :read-only="true" :increment="0.5" star-size="25" />
+                                        <StarRating :rating="averageRating" :read-only="true" :increment="0.5" star-size="25" />
+                                        {{averageRatingForAll }}
                                     </div>
                                     <button type="button" @click="showModal = true">Booking Now</button>
                                     <Modal v-model="showModal" title="Book Your Room Now">
@@ -196,7 +197,6 @@ export default {
         singleSelectedDate: String,
         roomId: Number,
         customersWithReviews: Array, // The array of customers with reviews
-        averageRatingForAll: Number, // The average rating for all reviews
     },
     data() {
         return {
@@ -208,7 +208,7 @@ export default {
             room: {},
             rating: 0,
             clients: [],
-            averageRating: [],
+            averageRating: 0,
             newComment: '',
             bookingCode: '',
             selectedDate: [
@@ -234,6 +234,10 @@ export default {
             this.fetchAvailableRooms();
         },
         rating(newRating) {
+            console.log('Rating changed to:', newRating);
+        },
+
+        averageRatingForAll(newRating) {
             console.log('Rating changed to:', newRating);
         },
     },
@@ -303,7 +307,9 @@ export default {
 
         fetchReviews() {
             axios.get('/api/reviews', {
-                roomId: this.roomId,
+                params: {
+                    roomId: this.roomId,
+                },
             })
                 .then((response) => {
                     console.log('Review submitted successfully');
