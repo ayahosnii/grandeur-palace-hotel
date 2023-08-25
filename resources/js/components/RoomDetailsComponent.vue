@@ -302,7 +302,9 @@ export default {
         },
 
         fetchReviews() {
-            axios.get('/api/reviews')
+            axios.get('/api/reviews', {
+                roomId: this.roomId,
+            })
                 .then((response) => {
                     console.log('Review submitted successfully');
                     console.log(response);

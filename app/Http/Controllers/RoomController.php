@@ -53,8 +53,11 @@ class RoomController extends Controller
 
     public function reviewsApi(Request $request)
     {
-        $clientsWithReviews = Customer::whereHas('bookings.reviews')->with('bookings.reviews')->get();
+        $roomId = $request->input('roomId');
 
+        $clientsWithReviews = Customer::whereHas('bookings.reviews', function ($query) use ($roomId) {
+            $query->where('room_id', $roomId);
+        })->with('bookings.reviews')->get();
         $averageRatingForAll = $clientsWithReviews->flatMap(function ($customer) {
             return $customer->bookings->flatMap->reviews->pluck('rating')->avg();
         });
