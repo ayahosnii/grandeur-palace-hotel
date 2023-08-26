@@ -24,11 +24,9 @@ class BookingRequest extends FormRequest
     public function rules()
     {
         return [
-            'check_in' => 'required|date',
-            'check_out' => 'required|date|after:check_in',
             'customer.firstname' => 'required|string',
             'customer.lastname' => 'required|string',
-            'customer.phone' => 'required|integer',
+            'customer.phone' => 'required',
             'customer.email' => 'required|email|unique:customers,email',
         ];
     }

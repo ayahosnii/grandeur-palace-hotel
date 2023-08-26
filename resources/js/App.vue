@@ -29,6 +29,8 @@
                 <div class="step" :class="{'step-active' : step === 3, 'step-done': step > 3}"><span class="step-number">3</span></div>
             </div>
 
+            <form class="form" action="#">
+
             <transition name="slide-fade" style="width: auto">
                 <section v-show="step === 1">
                     <form class="form" method="post" action="#" @submit.prevent="next">
@@ -67,7 +69,7 @@
                                         <div class="hp-room-items">
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-6" v-for="room in group" :key="room.id">
-                                                    <input type="checkbox" name="room" class="image-radio">
+                                                    <input type="checkbox" name="room" class="image-radio" @click="toggleRoomSelection(room.id)">
                                                     <div class="hp-room-item set-bg" :data-setbg="`${asset}/${room.image}`"  :style="'background-image: url(' + asset + '/' + room.image + ')'">
                                                         <div class="hr-text">
                                                             <h3>{{ room.room_type }}</h3>
@@ -118,10 +120,20 @@
                 <section v-show="step === 3">
                     <form class="form" action="#" @submit.prevent="customerRegister">
                         <div class="form-group">
-                            <input type="email" v-model="customer.eMail" autocomplete="customer.eMail" placeholder="Email" />
+                            <div class="col-md-6">
+                                <input type="text" v-model="customer.firstName" autocomplete="customer.firstName" @input="handleFirstNameInput" placeholder="First Name" />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" v-model="customer.lastName" autocomplete="customer.lastName" @input="handleLastNameInput" placeholder="Last Name" />
+                            </div>
                         </div>
                         <div class="form-group">
-                            <input type="date" v-model="customer.birthDay" placeholder="Birthday ('day'/'month'/'year')" />
+                            <div class="col-md-6">
+                                <input type="email" v-model="customer.eMail" autocomplete="customer.eMail" @input="handleEMailInput" placeholder="Email" />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" v-model="customer.phoneNumber" autocomplete="customer.phoneNumber" @input="handlePhoneNumberInput" placeholder="Phone Number" />
+                            </div>
                         </div>
 
                         <div class="form-group cta-step">
@@ -135,11 +147,12 @@
                             </div>
                         </div>
                         <div class="register-btn">
-                            <input type="submit" value="Créer mon compte" />
+                            <input type="submit" value="Book Now!" @click="bookRoom"/>
                         </div>
                     </form>
                 </section>
             </transition>
+            </form>
         </section>
         <section class="congrats register" v-if="hasSeenCongrats">
             <div class="register-icon">
@@ -148,8 +161,8 @@
             </div>
             <h2 class="congrats-title">Thank you !</h2>
             <p class="congrats-subtitle">
-                You have successfully created your account and joined the<br/>
-                <strong>VueJS<br/>multiple steps form</strong>
+                You have successfully booked your room/s<br/>
+                <strong>Grandeur Palace<br/>Hotel</strong>
             </p>
         </section>
 </template>
@@ -171,6 +184,7 @@ export default {
             isLoading: true,
             fullPage: true,
             calendarData: {},
+            selectedRooms: [],
             asset: 'assets/admin/images/room_images',
             selectedDate: [
                 new Date(),
@@ -179,32 +193,12 @@ export default {
             step: 1,
             rooms: [],
             customer: {
-                gender: "1",
                 firstName: "",
                 lastName: "",
                 phoneNumber: "",
-                search: "",
-                zipCode: "",
-                city: "",
-                birthDay: "",
-                termOfService: "",
-                pinCode: "",
                 eMail: ""
             },
             hasSeenCongrats: false,
-            tempCustomer: {
-                gender: "",
-                firstName: "",
-                lastName: "",
-                phoneNumber: "",
-                search: "",
-                zipCode: "",
-                city: "",
-                birthDay: "",
-                termOfService: "",
-                pinCode: "",
-                eMail: ""
-            },
         };
     },
     components: { Splide, SplideSlide, Loading},
@@ -222,6 +216,70 @@ export default {
         }
     },
     methods: {
+        toggleRoomSelection(roomId) {
+            // Check if roomId is already in the selectedRooms array
+            const index = this.selectedRooms.indexOf(roomId);
+
+            if (index === -1) {
+                // If not in the array, add it
+                this.selectedRooms.push(roomId);
+            } else {
+                // If already in the array, remove it
+                this.selectedRooms.splice(index, 1);
+            }
+
+            // Log or use this.selectedRooms as needed
+            console.log("Selected Room IDs:", this.selectedRooms);
+
+            // Example: If you want to emit an event to a parent component, you can use this.$emit
+            this.$emit("rooms-selected", this.selectedRooms);
+        },
+
+        handleFirstNameInput()
+        {
+            console.log("Selected Room IDs:", this.customer.firstName);
+        },
+
+        handleLastNameInput()
+        {
+            console.log("Selected Room IDs:", this.customer.lastName);
+        },
+
+        handleEMailInput()
+        {
+            console.log("Selected Room IDs:", this.customer.eMail);
+        },
+        handlePhoneNumberInput()
+        {
+            console.log("Selected Room IDs:", this.customer.phoneNumber);
+        },
+
+        bookRoom() {
+            console.log("Selected Rooms:", this.selectedRooms);
+            console.log("Check-in Date:", this.selectedDate.start);
+            console.log("Check-out Date:", this.selectedDate.end);
+            console.log("Customer Data:", this.customer);
+            axios.post('/api/bookings/store', {
+                roomId: this.selectedRooms,
+                check_in: this.checkInDate,
+                check_out: this.checkOutDate,
+                customer: {
+                    firstname: this.customer.firstName,
+                    lastname: this.customer.lastName,
+                    email: this.customer.eMail,
+                    phone: this.customer.phoneNumber,
+                },
+            })
+                .then(response => {
+                    console.log(response.data.message);
+                    $toast.success(response.data.message);
+                })
+                .catch(error => {
+                    console.error(error);
+                    $toast.info(error.response.data.message);
+                });
+        },
+
         doAjax() {
             this.isLoading = true;
 
