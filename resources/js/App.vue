@@ -59,45 +59,37 @@
             <transition name="slide-fade">
                 <section v-show="step === 2">
                     <form class="form" method="post" action="#" @submit.prevent="next">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2 style="text-align: center; color: #ffffff">Choose the rooms</h2>
-                                </div>
-                                <div class="col-md-12 my-5">
-                            <Splide v-if="rooms.length > 0" :options="{ rewind: true }" aria-label="Vue Splide Example">
-                                <SplideSlide v-for="(group, index) in groupedRooms" :key="index">
-                                    <section class="hp-room-section">
-                                        <div class="container-fluid">
-                                            <div class="hp-room-items">
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-6" v-for="room in group" :key="room.id">
-                                                        <input type="checkbox" name="room" class="image-radio">
-                                                        <div class="hp-room-item set-bg" :data-setbg="`${asset}/${room.image}`"  :style="'background-image: url(' + asset + '/' + room.image + ')'">
-                                                            <div class="hr-text">
-                                                                <h3>{{ room.room_type }}</h3>
-                                                                <h2>{{ room.price_per_night }}$<span>/Per night</span></h2>
-                                                                <a href="#" class="primary-btn">More Details</a>
-                                                            </div>
+                        <h2 style="text-align: center; color: #ffffff">Choose the rooms</h2>
+                        <Splide v-if="rooms.length > 0" :options="{ rewind: true }" aria-label="Vue Splide Example">
+                            <SplideSlide v-for="(group, index) in groupedRooms" :key="index">
+                                <section class="hp-room-section">
+                                    <div class="container-fluid">
+                                        <div class="hp-room-items">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-6" v-for="room in group" :key="room.id">
+                                                    <input type="checkbox" name="room" class="image-radio">
+                                                    <div class="hp-room-item set-bg" :data-setbg="`${asset}/${room.image}`"  :style="'background-image: url(' + asset + '/' + room.image + ')'">
+                                                        <div class="hr-text">
+                                                            <h3>{{ room.room_type }}</h3>
+                                                            <h2>{{ room.price_per_night }}$<span>/Per night</span></h2>
+                                                            <a href="#" class="primary-btn">More Details</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </section>
-                                </SplideSlide>
-                            </Splide>
-                            <div v-else>
-                                <loading v-model:active="isLoading"
-                                         :can-cancel="true"
-                                         :on-cancel="onCancel"
-                                         :is-full-page="fullPage"/>
+                                    </div>
+                                </section>
+                            </SplideSlide>
+                        </Splide>
+                        <div v-else>
+                            <loading v-model:active="isLoading"
+                                     :can-cancel="true"
+                                     :on-cancel="onCancel"
+                                     :is-full-page="fullPage"/>
 
-                                <h2 class="register-title">No room is available</h2>
+                            <h2 class="register-title">No room is available</h2>
 
-                            </div>
-                        </div>
-                            </div>
                         </div>
 
                         <div class="form-group cta-step">
