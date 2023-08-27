@@ -101,7 +101,7 @@
                     <div class="nav-menu">
                         <nav class="mainmenu">
                             <ul>
-                                <li class="active"><a href="{{url('/')}}">Home</a></li>
+                                <li><a href="{{url('/')}}">Home</a></li>
                                 <li><a href="{{route('rooms')}}">Rooms</a></li>
                                 <li><a href="./about-us.html">About Us</a></li>
                                 <li><a href="./pages.html">Pages</a>

@@ -184,13 +184,15 @@
 
 <script>
 import StarRating from 'vue-star-rating'
-const $toast = useToast();
+
 
 import {Splide, SplideSlide} from "@splidejs/vue-splide";
 import Loading from "vue-loading-overlay";
 import {useToast} from "vue-toast-notification";
+const $toast = useToast();
 
 export default {
+
     props: {
         singleSelectedDate: String,
         roomId: Number,

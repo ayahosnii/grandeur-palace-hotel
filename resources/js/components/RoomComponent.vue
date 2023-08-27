@@ -70,10 +70,12 @@
 
 <script>
 import { fetchRooms } from '../utils/api';
+
 import RoomFilterComponent from '../components/RoomFilters.vue';
 
 
     export default {
+
         props: {
             startDate: {
                 type: [Date, String],

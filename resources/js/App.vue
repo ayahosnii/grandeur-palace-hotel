@@ -169,12 +169,12 @@
 <script>
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
-const $toast = useToast();
 
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import '@splidejs/vue-splide/css';
 import { fetchAvailableRooms } from './utils/api';
 import {useToast} from "vue-toast-notification";
+const $toast = useToast();
 
 
 export default {

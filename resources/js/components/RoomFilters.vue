@@ -11,18 +11,24 @@
     <div class="select-option">
         <div class="slider-box">
             <label for="priceRange">Price Range:</label>
-            <div id="price-range" class="slider"></div>
-            <div class="row">
-                <div class="col-md-6">
-                    <input type="text" class="price-input" id="priceRangeMin"
-                           v-model="selectedPriceMin" @change="handleMinChange" readonly>
-                </div>
-                <div class="col-md-6">
-                    <input type="text" class="price-input" id="priceRangeMax"
-                           v-model="selectedPriceMax" @change="handleMinChange" readonly>
-                </div>
+            <div class="track-container">
+                <span class="range-value min">{{ minValue}} </span> <span class="range-value max">{{ maxValue }}</span>
+                <div class="track" ref="_vpcTrack"></div>
+                <div class="track-highlight" ref="trackHighlight"></div>
+                <button class="track-btn track1" ref="track1"></button>
+                <button class="track-btn track2" ref="track2"></button>
             </div>
 
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="price-input" id="priceRangeMin"
+                       v-model="minValue" @change="handleMinChange" readonly>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="price-input" id="priceRangeMax"
+                       v-model="maxValue" @change="handleMinChange" readonly>
+            </div>
         </div>
 
     </div>
@@ -43,29 +49,6 @@
 
 
     </div>
-    <div class="select-option">
-        <label> Services:</label>
-        <Multiselect
-            v-model="selectedServices"
-            mode="tags"
-            placeholder="Select options"
-            :close-on-select="false"
-            :searchable="true"
-            :object="true"
-            :resolve-on-load="false"
-            :delay="0"
-            :min-chars="1"
-            :options="serviceNames"
-            label="name"
-            track-by="name"
-        />
-        <div class="selected-services">
-            <p style="color:#d6b770">Selected Services:</p>
-            <ul  style="color:#fff">
-                <li v-for="service in selectedServices" :key="service.name">{{ service.name }}</li>
-            </ul>
-        </div>
-    </div>
     <button class="brown-btn" @click.prevent="applyFilters">Check Availability</button>
 
 </template>
@@ -76,8 +59,10 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import Multiselect from '@vueform/multiselect';
 import { fetchRooms, fetchServices } from '../utils/api';
+import VuePriceRangeMixin from '../utils/priceRange.js';
 
 export default {
+    mixins: [VuePriceRangeMixin],
     props: {
         startDate: {
             type: [Date, String],
@@ -95,8 +80,6 @@ export default {
         return {
             selectedRoomType: '',
             selectedadults: '',
-            selectedPriceMin: 0,
-            selectedPriceMax: 500,
             selectedServices: [],
             options: [],
             selectedCheck: '',
@@ -140,16 +123,17 @@ export default {
             }
         },
 
-        selectedPriceMin: {
+        minValue: {
             immediate: true,
             handler() {
-                console.log("selectedPriceMin changed:", this.selectedPriceMin);
+                console.log("minValue changed:", this.minValue);
                 this.updateComputedRooms();
             }
         },
-        selectedPriceMax: {
+        maxValue: {
             immediate: true,
             handler() {
+                console.log("minValue changed:", this.maxValue);
                 this.updateComputedRooms();
             }
         },
@@ -181,17 +165,6 @@ export default {
                     console.error(error);
                 });
         },
-
-        handleDateChange(newDate) {
-            this.date = newDate;
-        },
-
-        updateComputedRooms() {
-            const filtered = this.computedRooms;
-            this.filteredRooms = filtered;
-            this.$emit('filtered-rooms', filtered);
-        },
-
         async fetchAllRooms() {
             try {
                 const allRooms = await fetchRooms();
@@ -209,14 +182,24 @@ export default {
                 console.error(error);
             }
         },
+
+        handleDateChange(newDate) {
+            this.date = newDate;
+        },
+
+        updateComputedRooms() {
+            const filtered = this.computedRooms;
+            this.filteredRooms = filtered;
+            this.$emit('filtered-rooms', filtered);
+        },
+
+
     },
     computed: {
         computedRooms() {
-            if (!this.selectedRoomType &&!this.selectedadults && this.selectedServices.length === 0) {
-                return this.rooms;
-            }
-
-
+            console.log("computedRooms function is called");
+            console.log("minValue:", this.minValue);
+            console.log("maxValue:", this.maxValue);
 
             return this.rooms.filter((room) => {
                 let matches = true;
@@ -229,10 +212,15 @@ export default {
                     matches = false;
                 }
 
-                if (this.selectedPriceMin && room.price_per_night < parseFloat(this.selectedPriceMin)) {
-                    console.log(this.selectedPriceMin)
-                        matches = false;
-                    }
+                if (this.minValue && room.price_per_night < parseFloat(this.minValue)) {
+                    matches = false;
+                    console.log(`Filtered out room with price ${room.price_per_night} due to minValue ${this.minValue}`);
+                }
+
+                if (this.maxValue && room.price_per_night > parseFloat(this.maxValue)) {
+                    matches = false;
+                    console.log(`Filtered out room with price ${room.price_per_night} due to maxValue ${this.maxValue}`);
+                }
 
 
 /*
@@ -270,3 +258,61 @@ export default {
 </script>
 
 <style src="@vueform/multiselect/themes/default.css"></style>
+<style>
+.range-value{
+    position: absolute;
+    top: -2rem;
+}
+.range-value.min{
+    left: 0;
+}
+
+.range-value.max{
+    right: 0;
+}
+.track-container{
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    height: 0.5rem;
+}
+
+.track,
+.track-highlight {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 0.5rem;
+}
+
+.track{
+    background-color: #ddd;
+}
+
+.track-highlight{
+    background-color: black;
+    z-index: 2;
+}
+
+.track-btn{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    z-index: 2;
+    width: 1.5rem;
+    height: 1.5rem;
+    top: calc(-50% - 0.25rem);
+    margin-left: -1rem;
+    border: none;
+    background-color: black;
+    -ms-touch-action: pan-x;
+    touch-action: pan-x;
+    transition: box-shadow .3s ease-out,background-color .3s ease,-webkit-transform .3s ease-out;
+    transition: transform .3s ease-out,box-shadow .3s ease-out,background-color .3s ease;
+    transition: transform .3s ease-out,box-shadow .3s ease-out,background-color .3s ease,-webkit-transform .3s ease-out;
+}
+</style>
