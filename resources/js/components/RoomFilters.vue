@@ -37,10 +37,12 @@
         </div>
     <div class="select-option">
             <label>
-                Room Type:
+                Adults:
             </label>
-               <input type="number" v-model="selectedadults">
-        </div>
+        <vue-number-input v-model="selectedadults" :min="1" :max="10" inline controls></vue-number-input>
+
+
+    </div>
     <div class="select-option">
         <label> Services:</label>
         <Multiselect
