@@ -39,7 +39,7 @@
             <label>
                 Adults:
             </label>
-        <vue-number-input v-model="selectedadults" :min="1" :max="10" inline controls></vue-number-input>
+        <vue-number-input v-model="selectedadults" :min="0" :max="10" inline controls></vue-number-input>
 
 
     </div>
