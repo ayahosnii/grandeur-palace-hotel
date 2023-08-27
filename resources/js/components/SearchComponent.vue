@@ -69,62 +69,57 @@
 </template>
 
 <script>
-import { fetchRooms } from '../utils/api';
 import RoomFilterComponent from '../components/RoomFilters.vue';
+import axios from "axios";
 
 
-    export default {
-        props: {
-            startDate: {
-                type: [Date, String],
-                default: null
-            },
-            avaRoom: Array
+export default {
+    props: {
+        checkInDate: {
+            type: [Date, String],
+            default: null
         },
-            data() {
-                return {
-                    rooms: [],
-                    asset: 'assets\\admin\\images\\room_images',
-                    filteredRooms: [],
-                };
-            },
-        watch: {
-            avaRoom: {
-                handler(newAvaRoom) {
-                    // Check if avaRoom has values
-                    if (newAvaRoom && newAvaRoom.length > 0) {
-                        // Update filteredRooms based on avaRoom
-                        this.filteredRooms = this.rooms.filter((room) =>
-                            newAvaRoom.includes(room.id)
-                        );
-                    } else {
-                        // If avaRoom is empty, reset filteredRooms
-                        this.filteredRooms = this.rooms;
-                    }
-                },
-                immediate: true, // Trigger the handler immediately on component mount
-            },
+        checkOutDate: {
+            type: [Date, String],
+            default: null
         },
-            mounted() {
-                this.fetchAllRooms();
-                console.log(this.avaRoom)
-            },
-
-
-        methods: {
-            async fetchAllRooms() {
-                const allRooms = await fetchRooms();
-                this.filteredRooms = this.avaRoom ?? allRooms;
-            },
-            updateFilteredRooms(filteredRooms) {
-                this.filteredRooms = filteredRooms;
-            }
+    },
+    data() {
+        return {
+            rooms: [],
+            asset: 'assets\\admin\\images\\room_images',
+            filteredRooms: [],
+        };
+    },
+    mounted() {
+        this.fetchAllRooms();
+    },
+    methods: {
+        fetchRooms() {
+             axios.get('/api/rooms', {
+                 params: {
+                     check_in: this.checkInDate,
+                     check_out: this.checkOutDate,
+                 },
+             })
+        .then(response => {
+                console.log(response.data.message);
+                $toast.success(response.data.message);
+            })
+                .catch(error => {
+                    console.error(error);
+                    $toast.info(error.response.data.message);
+                });
         },
+        updateFilteredRooms(filteredRooms) {
+            this.filteredRooms  = filteredRooms;
+        },
+    },
 
-        components:{
-            RoomFilterComponent,
-        }
-        }
+    components:{
+        RoomFilterComponent,
+    }
+}
 
 </script>
 <style>

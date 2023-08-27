@@ -185,9 +185,7 @@
 <script>
 import StarRating from 'vue-star-rating'
 
-import {useToast} from 'vue-toast-notification';
-import 'vue-toast-notification/dist/theme-sugar.css';
-const $toast = useToast();
+
 
 
 import {Splide, SplideSlide} from "@splidejs/vue-splide";

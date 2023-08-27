@@ -25,6 +25,26 @@ class RoomController extends Controller
     {
         return view('rooms');
     }
+    public function search(Request $request)
+    {
+        // Retrieve query parameters from the request
+        $check_in = $request->input('check_in');
+        $check_out = $request->input('check_out');
+        $guests = $request->input('guests');
+
+
+        $carCheckin = Carbon::parse($check_in);
+        $carCheckout = Carbon::parse($check_out);
+
+        $formCheckIn = $carCheckin->format('Y-m-d H:i:s');
+        $formCheckOut = $carCheckout->format('Y-m-d H:i:s');
+
+
+//
+        $availableRooms = $this->checkRoomsAvailability($formCheckIn, $formCheckOut);
+
+        return view('search', compact('availableRooms'));
+    }
 
 
     public function reservation()

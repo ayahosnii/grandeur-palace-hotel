@@ -9,9 +9,13 @@ import RoomComponent from './components/RoomComponent.vue';
 import RoomDetailsComponent from "./components/RoomDetailsComponent.vue";
 import RoomFilters from './components/RoomFilters.vue';
 import FullCalendarComponent from './components/FullCalendarComponent.vue';
+import SlidesComponent from "./components/SlidesComponent.vue";
 import Main from './App.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+
+import VueNumberInput from '@chenfengyuan/vue-number-input';
+
 
 import VueDatepickerUi from 'vue-datepicker-ui'
 import 'vue-datepicker-ui/lib/vuedatepickerui.css';
@@ -39,10 +43,12 @@ createApp(Main)
 const app = createApp({});
 
 app.component('example-component', ExampleComponent);
+app.component('home-component', HomeComponent);
 app.component('main-component', Main);
 app.component('room-component', RoomComponent);
 app.component('room-details-component', RoomDetailsComponent);
 app.component('room-filters', RoomFilters);
+app.component('slides-component', SlidesComponent);
 app.component('calendar-component', CalendarComponent);
 app.component('fullcalendar-component', FullCalendarComponent);
 app.component('VueDatePicker', VueDatePicker);
@@ -51,12 +57,21 @@ app.component('VCalendar', VCalendar)
 app.use(ToastPlugin);
 //app.component('star-rating', VueStarRating.default);
 app.component('Modal', Modal)
+app.component(VueNumberInput.name, VueNumberInput);
+
 
 
 app.use(LoadingPlugin);
 app.use(VCalendar, {})
 
+import {useToast} from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+import HomeComponent from "./components/HomeComponent.vue";
+const $toast = useToast();
 
+let instance = $toast.success('You did it!');
+instance.dismiss();
+$toast.clear();
 
 
 app.mount('#app');

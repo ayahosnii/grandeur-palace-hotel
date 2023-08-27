@@ -20,6 +20,7 @@
         "vue": "^3.3.4"
     },
     "dependencies": {
+        "@chenfengyuan/vue-number-input": "^2.0.1",
         "@formkit/addons": "^0.18.3",
         "@formkit/themes": "^0.18.3",
         "@formkit/vue": "^0.18.3",

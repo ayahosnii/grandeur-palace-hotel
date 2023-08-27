@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms');
+Route::get('/rooms-search', [RoomController::class, 'search'])->name('search');
 Route::get('/reservation', [RoomController::class, 'reservation'])->name('reservation');
 Route::get('/rooms/{id}', [RoomController::class, 'details'])->name('rooms.details');
 
