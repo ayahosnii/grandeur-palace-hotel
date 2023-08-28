@@ -107,7 +107,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6">
+                                <div class="col-lg-6 col-md-12">
                                     <div class="hp-services-item set-bg" data-setbg="{{asset('assets/img/room/restaurant.jpg')}}">
                                         <div class="hr-text">
                                             <h3>Restaurant</h3>
