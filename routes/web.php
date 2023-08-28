@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\RestaurantController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,9 @@ Route::get('/rooms', [RoomController::class, 'index'])->name('rooms');
 Route::get('/rooms-search', [RoomController::class, 'search'])->name('search');
 Route::get('/reservation', [RoomController::class, 'reservation'])->name('reservation');
 Route::get('/rooms/{id}', [RoomController::class, 'details'])->name('rooms.details');
+
+Route::get('/restaurant', [RestaurantController::class, 'front'])->name('restaurant');
+
 
 Route::get('/api/bookings', [RoomController::class, 'bookingsApi'])->name('bookings.api');
 Route::get('/api/all-bookings', [RoomController::class, 'allBookingsApi'])->name('all.bookings.api');

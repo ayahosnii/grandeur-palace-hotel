@@ -282,7 +282,7 @@ ul, ol {
     z-index: 1000;
 }
 .hp-room-section{
-    background: #362f29;
+    background: #2a2a2a;
 }
 
 .header-section.header-normal .menu-item {
@@ -991,6 +991,61 @@ ul, ol {
 	width: 120px;
 }
 .hp-room-items .hp-room-item .hr-text .primary-btn:after {
+	background: #ffffff;
+}
+/*------------------------
+  Home Page Services Section
+-------------------------*/
+
+.hp-services-items {
+	margin-left: -15px;
+	margin-right: -15px;
+	overflow: hidden;
+    position: relative;
+}
+.hp-services-items .hp-services-item {
+	height: 400px;
+	margin-right: -15px;
+	position: relative;
+	overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.hp-services-items .hp-services-item:hover .hr-text {
+	bottom: 135px;
+}
+.hp-services-items .hp-services-item:hover .hr-text h2 {
+	margin-bottom: 30px;
+}
+.hp-services-items .hp-services-item .hr-text {
+	position: absolute;
+	left: 45px;
+	right: 25px;
+	bottom: -250px;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.hp-services-items .hp-services-item .hr-text h3 {
+	color: #ffffff;
+	margin-bottom: 15px;
+}
+.hp-services-items .hp-services-item .hr-text h2 {
+	color: #d6b770;
+	font-weight: 700;
+	margin-bottom: 50px;
+	-webkit-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	transition: all 0.2s;
+}
+.hp-services-items .hp-services-item .hr-text h2 span {
+    font-family: "Lora", serif;
+	font-size: 16px;
+	font-weight: 400;
+	color: #ffffff;
+}
+.hp-services-items .hp-services-item .hr-text .primary-btn:after {
 	background: #ffffff;
 }
 /*---------------------

@@ -27,7 +27,7 @@ class BookingRequest extends FormRequest
             'customer.firstname' => 'required|string',
             'customer.lastname' => 'required|string',
             'customer.phone' => 'required',
-            'customer.email' => 'required|email|unique:customers,email',
+            'customer.email' => 'required|email',
         ];
     }
 }
