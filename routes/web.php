@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\RestaurantController;
+use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
