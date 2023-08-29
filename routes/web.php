@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+include('admin.php');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [FrontController::class, 'index'])->name('home');
 
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms');
 Route::get('/rooms-search', [RoomController::class, 'search'])->name('search');

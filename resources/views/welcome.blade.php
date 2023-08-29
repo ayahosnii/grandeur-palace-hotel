@@ -38,12 +38,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="service-item">
-                            <i class="flaticon-036-parking"></i>
-                            <h4>Travel Plan</h4>
+                    @foreach($services as $service)
+                        <div class="col-lg-2 col-sm-6">
+                            <div class="service-item">
+                                <i style="font-size: 40px" class="{{$service->icon_class}}"></i>
+                                <h4>{{$service->name}}</h4>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                     <div class="col-lg-2 col-sm-6">
                         <div class="service-item">
                             <i class="flaticon-033-dinner"></i>

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Models\Service;
+use App\Http\Controllers\Controller;
+use App\Models\admin\SalaryDetail;
 use Illuminate\Http\Request;
 
-class FrontController extends Controller
+class SalaryDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,7 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $services = Service::where('display_on_homepage', 1)->get();
-        return view('welcome', compact('services'));
+        //
     }
 
     /**
@@ -42,10 +42,10 @@ class FrontController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\admin\SalaryDetail  $salaryDetail
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(SalaryDetail $salaryDetail)
     {
         //
     }
@@ -53,10 +53,10 @@ class FrontController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\admin\SalaryDetail  $salaryDetail
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(SalaryDetail $salaryDetail)
     {
         //
     }
@@ -65,10 +65,10 @@ class FrontController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\admin\SalaryDetail  $salaryDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, SalaryDetail $salaryDetail)
     {
         //
     }
@@ -76,10 +76,10 @@ class FrontController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\admin\SalaryDetail  $salaryDetail
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SalaryDetail $salaryDetail)
     {
         //
     }

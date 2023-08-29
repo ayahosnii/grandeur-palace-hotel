@@ -112,7 +112,7 @@
                                         <li><a href="#">Premium Room</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="./blog.html">News</a></li>
+                                <li><a href="./blog.html">Restaurant</a></li>
                                 <li><a href="./contact.html">Contact</a></li>
                                 <li><a href="{{url('/reservation')}}" class="bk-btn">Booking Now</a></li>
                             </ul>

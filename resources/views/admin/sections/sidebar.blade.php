@@ -54,15 +54,15 @@
                 </a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="{{route('admin.rooms')}}" data-i18n="nav.color_palette.color_palette_blue_grey">
-                            Rooms
+                        <a class="menu-item" href="{{route('admin.services')}}" data-i18n="nav.color_palette.color_palette_blue_grey">
+                            Services
                         </a>
                     </li>
 
                     <li class="navigation-divider"></li>
                     <li>
-                        <a class="menu-item" href="{{route('admin.rooms.create')}}" data-i18n="nav.color_palette.color_palette_primary">
-                            Add a Room
+                        <a class="menu-item" href="{{route('admin.services.create')}}" data-i18n="nav.color_palette.color_palette_primary">
+                            Add a Service
                         </a>
                     </li>
                 </ul>
@@ -94,30 +94,61 @@
                 </i>
 
             </li>
-            <li class=" nav-item">
-                <a href="#"><i class="la la-paint-brush"></i>
-                    <span class="menu-title" data-i18n="nav.color_palette.main">
-                        Jobs
-                    </span>
-                    <span class="badge badge badge-light badge-pill float-right mr-2">{{\App\Models\admin\Room::count()}}</span>
-
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">Jobs  </span>
+                    <span
+                        class="badge badge badge-light badge-pill float-right mr-2"> {{\App\Models\admin\Job::count()}}</span>
                 </a>
                 <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{route('admin.rooms')}}" data-i18n="nav.color_palette.color_palette_blue_grey">
-                            Jobs
-                        </a>
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{route('admin.jobs')}}"
+                           data-i18n="nav.dash.ecommerce"> Show All </a>
                     </li>
-
-                    <li class="navigation-divider"></li>
-                    <li>
-                        <a class="menu-item" href="{{route('admin.rooms.create')}}" data-i18n="nav.color_palette.color_palette_primary">
-                            Add a job
-                        </a>
+                    <li><a class="menu-item" href="{{route('admin.jobs.create')}}"
+                           data-i18n="nav.dash.crypto">Add New Jobs</a>
                     </li>
                 </ul>
             </li>
-
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">Employees  </span>
+                    <span
+                        class="badge badge badge-light badge-pill float-right mr-2"> {{\App\Models\admin\Employee::count()}}</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{route('admin.employees')}}"
+                           data-i18n="nav.dash.ecommerce"> Show Employees </a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.employees.create')}}"
+                           data-i18n="nav.dash.crypto">Add a new employee</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">Absents  </span>
+                </a>
+                <ul class="menu-content">
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{route('admin.attendance')}}"
+                           data-i18n="nav.dash.ecommerce"> Show attendance </a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.attendance.create')}}"
+                           data-i18n="nav.dash.crypto">Add a new attendance</a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.punctuality')}}"
+                           data-i18n="nav.dash.crypto">مراجعة الالتزام بالمواعيد</a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.attendance.absence')}}"
+                           data-i18n="nav.dash.crypto">مراجعة الغياب</a>
+                    </li>
+                </ul>
+            </li>
             <li class=" navigation-header">
                 <span data-i18n="nav.category.addons">Invoices & Reports</span>
                 <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"

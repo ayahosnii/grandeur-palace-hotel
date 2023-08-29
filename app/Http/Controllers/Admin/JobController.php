@@ -3,50 +3,51 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Service;
+use App\Models\admin\Job;
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function index()
     {
-        $services = Service::paginate(5);
-        return view('admin.services.index', ['services' => $services]);
+        $jobs = Job::get();
+        return view('admin.jobs.index', compact('jobs'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        return view('admin.jobs.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        Job::create($request->except('_token'));
+        return redirect()->route('admin.jobs')->with(['success' => 'تم ألاضافة بنجاح']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\admin\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(Job $job)
     {
         //
     }
@@ -54,10 +55,10 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\admin\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit(Job $job)
     {
         //
     }
@@ -66,10 +67,10 @@ class ServiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\admin\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(Request $request, Job $job)
     {
         //
     }
@@ -77,10 +78,10 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\admin\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Job $job)
     {
         //
     }

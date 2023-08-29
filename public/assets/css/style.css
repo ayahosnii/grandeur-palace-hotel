@@ -903,6 +903,13 @@ ul, ol {
 .service-item:hover i {
 	color: #ffffff;
 }
+.service-item:hover svg {
+	color: #ffffff;
+}
+.service-item svg {
+	color: #d6b770;
+    font-size: 40px;
+}
 .service-item:hover h4 {
 	color: #ffffff;
 }
@@ -910,6 +917,14 @@ ul, ol {
 	color: #ffffff;
 }
 .service-item i {
+	display: inline-block;
+	color: #d6b770;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.service-item svg {
 	display: inline-block;
 	color: #d6b770;
 	-webkit-transition: all 0.3s;
