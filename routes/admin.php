@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\PunctualityController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\MealController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,17 @@ Route::get('/services/edit/{id}', [ServiceController::class, 'edit'])->name('adm
 Route::put('/services/update/{id}', [ServiceController::class, 'update'])->name('admin.services.update');
 Route::get('/services/destroy', [ServiceController::class, 'destroy'])->name('admin.services.delete');
 ########################################## End  Services Route ##############################################################
+################################## Meals routes ######################################
+Route::group(['prefix' => 'meals'], function () {
+    Route::get('/', [MealController::class,'index'])->name('admin.meals');
+    Route::get('create', [MealController::class,'create'])->name('admin.meals.create');
+    Route::post('store', [MealController::class,'store'])->name('admin.meals.store');
+    Route::get('delete/{id}', [MealController::class,'destroy'])->name('admin.meals.delete');
+    Route::get('edit/{id}', [MealController::class,'edit'])->name('admin.meals.edit');
+    Route::post('update/{id}', [MealController::class,'update'])->name('admin.meals.update');
+});
+################################## end Meals    #######################################
+
 ################################## Jobs routes ######################################
 Route::group(['prefix' => 'jobs'], function () {
     Route::get('/', [JobController::class,'index'])->name('admin.jobs');

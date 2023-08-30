@@ -28,4 +28,9 @@ class Employee extends Model
     {
         return $this->hasManyThrough(Punctuality::class, Attendance::class, 'employee_id', 'attendance_id');
     }
+
+    public function getImageAttribute($value)
+    {
+        return asset('assets/admin/images/employees/' . $value);
+    }
 }

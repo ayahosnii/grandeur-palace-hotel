@@ -9,9 +9,9 @@
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="">الرئيسية </a>
+                                <li class="breadcrumb-item"><a href="">Home </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href=""> الاقسام الرئيسية </a>
+                                <li class="breadcrumb-item"><a href=""> الاقسام Home </a>
                                 </li>
                                 <li class="breadcrumb-item active"> Edit - {{$category -> name}}
                                 </li>

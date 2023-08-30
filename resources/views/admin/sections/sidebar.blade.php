@@ -150,9 +150,26 @@
                 </ul>
             </li>
             <li class=" navigation-header">
-                <span data-i18n="nav.category.addons">Invoices & Reports</span>
+                <span data-i18n="nav.category.addons">Restaurant</span>
                 <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
                                                                        data-placement="right" data-original-title="Add Ons"></i>
+            </li>
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">Meals  </span>
+                    <span
+                        class="badge badge badge-light badge-pill float-right mr-2"> {{\App\Models\admin\Meal::count()}}</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{route('admin.meals')}}"
+                           data-i18n="nav.dash.ecommerce"> Show All </a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.meals.create')}}"
+                           data-i18n="nav.dash.crypto">Add New Jobs</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

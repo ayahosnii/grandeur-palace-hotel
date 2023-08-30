@@ -53,7 +53,7 @@
                                                     <div class="card" style="background-color: #f0fafb">
                                                         <div class="text-center">
                                                             <div class="card-body">
-                                                                <img src="{{$employee->image}}" class="rounded-circle  height-150"
+                                                                <img src="{{asset('assets/admin/images/icons/user.png')}}" class="rounded-circle  height-150"
                                                                      alt="Card image">
                                                             </div>
                                                             <div class="card-body">

@@ -10,10 +10,10 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Home </a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('admin.jobs')}}"> الاقسام
-                                        Home </a>
+                                <li class="breadcrumb-item"><a href="{{route('admin.meals')}}"> Meals
+                                         </a>
                                 </li>
-                                <li class="breadcrumb-item active"> أضافه وظيفة
+                                <li class="breadcrumb-item active">Add A Meal
                                 </li>
                             </ol>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title" id="basic-layout-form"> أضافة وظيفة </h4>
+                                    <h4 class="card-title" id="basic-layout-form"> Add A Meal</h4>
                                     <a class="heading-elements-toggle"><i
                                             class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -49,7 +49,7 @@
                                               enctype="multipart/form-data">
                                             @csrf
                                             <div class="form-group">
-                                                <label> صورة المنتج </label>
+                                                <label> Meal's image </label>
                                                 <label id="projectinput7" class="file center-block">
                                                     <div class="avatar-upload">
                                                         <div class="avatar-edit">
@@ -70,11 +70,11 @@
 
                                             <div class="form-body">
 
-                                                <h4 class="form-section"><i class="ft-home"></i> بيانات الوظيفة </h4>
+                                                <h4 class="form-section"><i class="ft-home"></i> Meal </h4>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> اسم الموظف </label>
+                                                            <label for="projectinput1"> Meal's name </label>
                                                             <input type="text" id="name"
                                                                    class="form-control"
                                                                    placeholder=" "
@@ -87,35 +87,29 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput1"> الوظيفة </label>
-                                                            <select name="job_id" class="form-control">
-                                                                <optgroup label="من فضلك أختر القسم ">
-                                                                    @if($jobs && $jobs -> count() > 0)
-                                                                        @foreach($jobs as $job)
-                                                                            <option
-                                                                                value="{{$job -> id }}">{{$job -> title}}</option>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </optgroup>
-                                                            </select>
-                                                            @error('job_id')
-                                                            <span class="text-danger"> {{$message}}</span>
+                                                            <label for="projectinput1"> price </label>
+                                                            <input type="number" id="price"
+                                                                   class="form-control"
+                                                                   placeholder=" "
+                                                                   value="{{ old('price') }}"
+                                                                   name="price">
+                                                            @error("price")
+                                                            <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
-
                                                     </div>
                                                 </div>
 
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput3"> الراتب الأساسي </label>
-                                                            <input type="text" id="basic_salary"
+                                                            <label for="projectinput3"> Description </label>
+                                                            <input type="text" id="description"
                                                                    class="form-control"
                                                                    placeholder=" "
-                                                                   value="{{ old('basic_salary') }}"
-                                                                   name="basic_salary">
-                                                            @error("basic_salary")
+                                                                   value="{{ old('description') }}"
+                                                                   name="description">
+                                                            @error("description")
                                                             <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
@@ -123,12 +117,12 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="projectinput2"> الرقم الوظيفي للموظف </label>
-                                                            <input type="date" id="effective_date"
-                                                                   class="form-control"
-                                                                   placeholder=" "
-                                                                   value="{{ old('effective_date') }}"
-                                                                   name="effective_date">
+                                                            <label for="projectinput2"> Category </label>
+                                                            <select class="form-control" id="category" name="category" required>
+                                                                <option value="breakfast">Breakfast</option>
+                                                                <option value="lunch">Lunch</option>
+                                                                <option value="dinner">Dinner</option>
+                                                            </select>
                                                             @error("effective_date")
                                                             <span class="text-danger">{{ $message }}</span>
                                                             @enderror

@@ -231,15 +231,15 @@ class EmployeeController extends Controller
         if ($salaryDetail) {
             $salaryDetail->update([
                 'basic_salary' => $request->input('basic_salary'),
-                'effective_date' => $request->input('effective_date'),
-                'new_salary' => $newSalary, // Set the calculated new_salary
+                'effective_date' => $salaryDetail->effective_date,
+                'new_salary' => $salaryDetail->new_salary
             ]);
         } else {
             SalaryDetail::create([
                 'employee_id' => $employee->id,
                 'basic_salary' => $request->input('basic_salary'),
                 'effective_date' => $request->input('effective_date'),
-                'new_salary' => $newSalary, // Set the calculated new_salary
+                'new_salary' => $newSalary,
             ]);
         }
 

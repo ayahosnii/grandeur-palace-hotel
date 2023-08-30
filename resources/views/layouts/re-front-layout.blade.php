@@ -203,6 +203,20 @@
 <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
+
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('assets/restaurant/lib/wow/wow.min.js')}}"></script>
+<script src="{{asset('assets/restaurant/lib/easing/easing.min.js')}}"></script>
+<script src="{{asset('assets/restaurant/lib/waypoints/waypoints.min.js')}}"></script>
+<script src="{{asset('assets/restaurant/lib/counterup/counterup.min.js')}}"></script>
+<script src="{{asset('assets/restaurant/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+<script src="{{asset('assets/restaurant/lib/tempusdominus/js/moment.min.js')}}"></script>
+<script src="{{asset('assets/restaurant/lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+<script src="{{asset('assets/restaurant/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <script src="{{asset('assets/restaurant/js/main.js')}}"></script>
 
 <script>

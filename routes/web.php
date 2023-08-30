@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\RestaurantController;
+use App\Http\Controllers\Admin\RoomCleaningQueueController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\RoomController;
@@ -16,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-include('admin.php');
 
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
@@ -44,3 +44,11 @@ Route::get('/api/check-the-room-availability', [RoomController::class, 'checkThe
 Route::get('/api/services', [RoomController::class, 'servicesApi'])->name('services.api');
 
 Route::post('/api/bookings/store', [BookingController::class, 'store'])->name('bookings.store.api');
+
+################################## Rooms Cleaning Queue routes ######################################
+Route::group(['prefix' => 'room-cleaning-queue'], function () {
+    Route::get('/', [RoomCleaningQueueController::class, 'index'])->name('room-cleaning-queue.index');
+    Route::get('/dd', [RoomCleaningQueueController::class, 'dd'])->name('room-cleaning-queue.dd');
+    Route::post('/enqueue', [RoomCleaningQueueController::class, 'enqueue'])->name('room-cleaning-queue.enqueue');
+    Route::post('/clean', [RoomCleaningQueueController::class, 'clean'])->name('room-cleaning-queue.clean');});
+################################## end Rooms Cleaning Queue    #######################################

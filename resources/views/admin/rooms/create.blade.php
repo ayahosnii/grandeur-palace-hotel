@@ -138,9 +138,9 @@
                                                         </div>
                                                     </div>
                                                 </label>
-                                                {{--@error('image')
+                                                @error('image')
                                                 <span class="text-danger">{{$message}}</span>
-                                                @enderror--}}
+                                                @enderror
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -152,9 +152,9 @@
                                                                placeholder="  "
                                                                value="{{old('room_type')}}"
                                                                name="room_type">
-                                                     {{--@error("room_type")
+                                                     @error("room_type")
                                                         <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -166,9 +166,9 @@
                                                                placeholder="  "
                                                                value="{{old('price_per_night')}}"
                                                                name="price_per_night">
-                                                     {{--@error("price_per_night")
+                                                     @error("price_per_night")
                                                         <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,9 +182,9 @@
                                                                placeholder="  "
                                                                value="{{old('size')}}"
                                                                name="size">
-                                                     {{--@error("size")
+                                                     @error("size")
                                                         <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -212,9 +212,9 @@
                                                                placeholder="  "
                                                                value="{{old('bed_type')}}"
                                                                name="bed_type">
-                                                     {{--@error("bed_type")
+                                                     @error("bed_type")
                                                         <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -226,9 +226,9 @@
                                                                placeholder="  "
                                                                value="{{old('adults')}}"
                                                                name="adults">
-                                                     {{--@error("adults")
+                                                     @error("adults")
                                                         <span class="text-danger">{{$message}}</span>
-                                                        @enderror--}}
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>

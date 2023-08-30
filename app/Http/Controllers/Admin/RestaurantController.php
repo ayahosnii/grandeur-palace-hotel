@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\Meal;
 use App\Models\cr;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,10 @@ class RestaurantController extends Controller
      */
     public function front()
     {
-        return view('restaurant');
+        $meals = Meal::where('category', 'breakfast')->get();
+        $count = $meals->count() / 2;
+        $mealsChunks = $meals->chunk($count);
+        return view('restaurant', compact('mealsChunks'));
     }
 
     /**
