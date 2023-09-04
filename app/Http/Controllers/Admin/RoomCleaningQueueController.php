@@ -14,18 +14,19 @@ class RoomCleaningQueueController extends Controller
 
     public function __construct()
     {
-        $this->queue = Session::get('roomCleaningQueue', new LinkedListQueue());
+        $this->queue = new LinkedListQueue();
+
     }
 
 
     public function index()
     {
-        Session::get('roomCleaningQueue');
-        return view('admin.tasks.room_cleaning_queue', ['queue' => $this->queue]);
+        $sessionList = json_decode(Session::get('theLinkedList'), true);
+        return view('admin.tasks.room_cleaning_queue', compact('sessionList'));
     }
     public function dd()
     {
-        dd(Session::get('roomCleaningQueue'));
+        dd(\session()->all());
     }
 
     public function enqueue(Request $request)
@@ -35,8 +36,6 @@ class RoomCleaningQueueController extends Controller
         if ($roomNumber) {
             $this->queue->enqueue($roomNumber);
 
-            // Store the updated queue in the session
-            Session::put('roomCleaningQueue', $this->queue);
         }
 
         return redirect('/room-cleaning-queue');
@@ -44,14 +43,8 @@ class RoomCleaningQueueController extends Controller
 
     public function clean()
     {
-        $cleanedRoom = $this->queue->dequeue();
+        $this->queue->dequeue();
 
-        if ($cleanedRoom !== null) {
-            Log::info("Room {$cleanedRoom} cleaned successfully.");
-        } else {
-            Log::info("No rooms in the queue.");
-        }
-
-        return redirect('/room-cleaning-queue');
+        return redirect()->back();
     }
 }

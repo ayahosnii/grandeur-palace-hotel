@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RoomAvailabilityChecker;
+use App\Models\admin\BookingRoomPivot;
 use App\Models\admin\Room;
+use App\Models\admin\RoomsWithNumber;
 use App\Models\Booking;
 use App\Models\Client;
 use App\Models\Customer;
@@ -186,23 +189,42 @@ class RoomController extends Controller
 
     public function checkRoomsAvailability($formCheckIn, $formCheckOut)
     {
-        $occupiedRoomIds = Booking::where(function ($query) use ($formCheckIn, $formCheckOut) {
-            $query->where(function ($q) use ($formCheckIn, $formCheckOut) {
-                $q->where('check_in', '<', $formCheckOut)
-                    ->where('check_out', '>', $formCheckIn);
-            });
+        $checkInDate = Carbon::parse($formCheckIn);
+        $checkOutDate = Carbon::parse($formCheckOut);
+
+        // Get All Rooms with their room types
+        $roomsWithNumbers = RoomsWithNumber::where('available', 1)->pluck('room_id');
+
+        $bookedRoomIds = BookingRoomPivot::whereHas('booking', function ($query) use ($checkInDate, $checkOutDate) {
+            $query->whereBetween('check_in', [$checkInDate, $checkOutDate])
+                ->orWhereBetween('check_out', [$checkInDate, $checkOutDate]);
         })->pluck('room_id');
 
-        // Get all room IDs
-        $allRoomIds = Room::pluck('id');
+        // Filter rooms based on availability and not being booked
+        $availableRoomIds = $roomsWithNumbers->diff($bookedRoomIds)->toArray();
 
-        // Calculate available room IDs
-        $availableRoomIds = $allRoomIds->diff($occupiedRoomIds);
-
-        // Get the available rooms
         $availableRooms = Room::whereIn('id', $availableRoomIds)->get();
 
-        return $availableRooms;
+        // Count each room separately
+        $availableRoomCounts = array_count_values($availableRoomIds);
+
+        // Format rooms data
+        $formattedRooms = $availableRooms->map(function ($room) {
+            return [
+                'id' => $room->id,
+                'room_type' => $room->room_type,
+                'image' => $room->image,
+                'price_per_night' => $room->price_per_night,
+                'size' => $room->size,
+                'capacity' => $room->capacity,
+                'bed_type' => $room->bed_type,
+                'adults' => $room->adults,
+                'created_at' => $room->created_at,
+                'updated_at' => $room->updated_at,
+            ];
+        });
+
+        return $formattedRooms;
     }
 
     public function checkTheRoomAvailability(Request $request)
@@ -213,27 +235,12 @@ class RoomController extends Controller
 
         $now = Carbon::now();
 
-        if ($checkIn <= $now || $checkOut <= $now) {
+        if ($checkIn < $now || $checkOut < $now) {
             return response()->json(['message' => 'You can\'t check this room. Check-in or check-out is in the past.']);
         }
 
-        $bookingsForRoom = Booking::where('room_id', $roomId)->get();
+        $isRoomAvailable = RoomAvailabilityChecker::isRoomAvailable($roomId, $checkIn, $checkOut);
 
-        // Check if the room is available for the requested dates
-        $isRoomAvailable = true;
-
-        foreach ($bookingsForRoom as $booking) {
-            $bookingCheckIn = Carbon::parse($booking->check_in);
-            $bookingCheckOut = Carbon::parse($booking->check_out);
-
-            if (
-                $checkIn >= $bookingCheckIn && $checkIn < $bookingCheckOut ||
-                $checkOut > $bookingCheckIn && $checkOut <= $bookingCheckOut
-            ) {
-                $isRoomAvailable = false;
-                break;
-            }
-        }
 
         if ($isRoomAvailable) {
             return response()->json(['message' => 'This room is available']);
@@ -243,12 +250,12 @@ class RoomController extends Controller
     }
 
 
-   public function servicesApi(Request $request)
-   {
-       $services = Service::get();
+    public function servicesApi(Request $request)
+    {
+        $services = Service::get();
 
-       return response()->json($services);
-   }
+        return response()->json($services);
+    }
 
 
     /**

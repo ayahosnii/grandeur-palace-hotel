@@ -39,4 +39,10 @@ class Room extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function roomwithnumber()
+    {
+        return $this->hasMany(RoomsWithNumber::class);
+    }
+
 }

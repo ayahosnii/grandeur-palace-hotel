@@ -13,78 +13,33 @@
                     </li>
                 </ul>
             </li>
+
             <li class=" navigation-header">
                 <span data-i18n="nav.category.general">
-                    Items</span>
+                    Check-in & out</span>
                 <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="General">
 
                 </i>
 
             </li>
-            <li class=" nav-item">
-                <a href="#"><i class="la la-paint-brush"></i>
-                    <span class="menu-title" data-i18n="nav.color_palette.main">
-                        Rooms
-                    </span>
-                    <span class="badge badge badge-light badge-pill float-right mr-2">{{\App\Models\admin\Room::count()}}</span>
-
+            <li class="nav-item">
+                <a href="">
+                    <i class="la la-male"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">Guest Booking  </span>
+                    <span
+                        class="badge badge badge-light badge-pill float-right mr-2"> {{\App\Models\Booking::count()}}</span>
                 </a>
                 <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{route('admin.rooms')}}" data-i18n="nav.color_palette.color_palette_blue_grey">
-                            Rooms
-                        </a>
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{route('admin.guest-booking.create')}}"
+                           data-i18n="nav.dash.ecommerce"> Guest Booking </a>
                     </li>
-
-                    <li class="navigation-divider"></li>
-                    <li>
-                        <a class="menu-item" href="{{route('admin.rooms.create')}}" data-i18n="nav.color_palette.color_palette_primary">
-                            Add a Room
-                        </a>
+                    <li><a class="menu-item" href="{{route('admin.jobs.create')}}"
+                           data-i18n="nav.dash.crypto">Add New Jobs</a>
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item">
-                <a href="#"><i class="la la-paint-brush"></i>
-                    <span class="menu-title" data-i18n="nav.color_palette.main">
-                        Services
-                    </span>
-                    <span class="badge badge badge-light badge-pill float-right mr-2">{{\App\Models\Service::count()}}</span>
 
-                </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{route('admin.services')}}" data-i18n="nav.color_palette.color_palette_blue_grey">
-                            Services
-                        </a>
-                    </li>
-
-                    <li class="navigation-divider"></li>
-                    <li>
-                        <a class="menu-item" href="{{route('admin.services.create')}}" data-i18n="nav.color_palette.color_palette_primary">
-                            Add a Service
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class=" navigation-header">
-                <span data-i18n="nav.category.tables">Clients</span>
-                <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
-                                                                      data-placement="right" data-original-title="Tables"></i>
-            </li>
-
-
-            <li class=" nav-item">
-                <a href="table-jsgrid.html">
-                    <i class="la la-table"></i>
-                    <span class="menu-title" data-i18n="nav.table_jsgrid.main">Reviews</span></a>
-            </li>
-
-            <li class=" nav-item">
-                <a href="table-jsgrid.html">
-                    <i class="la la-table"></i>
-                    <span class="menu-title" data-i18n="nav.table_jsgrid.main">Contact-us</span></a>
-            </li>
 
             <li class=" navigation-header">
                 <span data-i18n="nav.category.general">
@@ -150,7 +105,7 @@
                 </ul>
             </li>
             <li class=" navigation-header">
-                <span data-i18n="nav.category.addons">Restaurant</span>
+                <span data-i18n="nav.category.addons">Restaurant Management</span>
                 <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
                                                                        data-placement="right" data-original-title="Add Ons"></i>
             </li>
@@ -170,6 +125,103 @@
                            data-i18n="nav.dash.crypto">Add New Jobs</a>
                     </li>
                 </ul>
+            </li>
+
+            <li class=" navigation-header">
+                <span data-i18n="nav.category.general">
+                    Items</span>
+                <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="General">
+
+                </i>
+
+            </li>
+            <li class=" nav-item">
+                <a href="#"><i class="la la-paint-brush"></i>
+                    <span class="menu-title" data-i18n="nav.color_palette.main">
+                        Rooms
+                    </span>
+                    <span class="badge badge badge-light badge-pill float-right mr-2">{{\App\Models\admin\Room::count()}}</span>
+
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{route('admin.rooms')}}" data-i18n="nav.color_palette.color_palette_blue_grey">
+                            Rooms
+                        </a>
+                    </li>
+
+                    <li class="navigation-divider"></li>
+                    <li>
+                        <a class="menu-item" href="{{route('admin.rooms.create')}}" data-i18n="nav.color_palette.color_palette_primary">
+                            Add a Room
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item">
+                <a href="#"><i class="la la-paint-brush"></i>
+                    <span class="menu-title" data-i18n="nav.color_palette.main">
+                        Services
+                    </span>
+                    <span class="badge badge badge-light badge-pill float-right mr-2">{{\App\Models\Service::count()}}</span>
+
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{route('admin.services')}}" data-i18n="nav.color_palette.color_palette_blue_grey">
+                            Services
+                        </a>
+                    </li>
+
+                    <li class="navigation-divider"></li>
+                    <li>
+                        <a class="menu-item" href="{{route('admin.services.create')}}" data-i18n="nav.color_palette.color_palette_primary">
+                            Add a Service
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item">
+                <a href="#"><i class="la la-paint-brush"></i>
+                    <span class="menu-title" data-i18n="nav.color_palette.main">
+                        Meals
+                    </span>
+                    <span class="badge badge badge-light badge-pill float-right mr-2">{{\App\Models\Service::count()}}</span>
+
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{route('admin.services')}}" data-i18n="nav.color_palette.color_palette_blue_grey">
+                            Meals
+                        </a>
+                    </li>
+
+                    <li class="navigation-divider"></li>
+                    <li>
+                        <a class="menu-item" href="{{route('admin.services.create')}}" data-i18n="nav.color_palette.color_palette_primary">
+                            Add a Service
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class=" navigation-header">
+                <span data-i18n="nav.category.tables">Clients</span>
+                <i class="la la-ellipsis-h ft-minus" data-toggle="tooltip"
+                   data-placement="right" data-original-title="Tables"></i>
+            </li>
+
+
+            <li class=" nav-item">
+                <a href="table-jsgrid.html">
+                    <i class="la la-table"></i>
+                    <span class="menu-title" data-i18n="nav.table_jsgrid.main">Reviews</span></a>
+            </li>
+
+            <li class=" nav-item">
+                <a href="table-jsgrid.html">
+                    <i class="la la-table"></i>
+                    <span class="menu-title" data-i18n="nav.table_jsgrid.main">Contact-us</span></a>
             </li>
         </ul>
     </div>

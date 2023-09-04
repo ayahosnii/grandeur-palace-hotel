@@ -45,6 +45,8 @@ Route::get('/api/services', [RoomController::class, 'servicesApi'])->name('servi
 
 Route::post('/api/bookings/store', [BookingController::class, 'store'])->name('bookings.store.api');
 
+Route::get('/guest-booking', [FrontController::class, 'Standard'])->name('bookings.guest');
+
 ################################## Rooms Cleaning Queue routes ######################################
 Route::group(['prefix' => 'room-cleaning-queue'], function () {
     Route::get('/', [RoomCleaningQueueController::class, 'index'])->name('room-cleaning-queue.index');

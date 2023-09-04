@@ -48,20 +48,31 @@
                                         <form method="post" action="{{ route('room-cleaning-queue.enqueue') }}">
                                             @csrf
                                             <label for="room_number">Enter room number to clean:</label>
-                                            <input type="number" name="room_number" id="room_number">
-                                            <button type="submit">Enqueue</button>
+                                            <input class="form-group" type="number" name="room_number" id="room_number">
+                                            <button class="btn btn-primary" type="submit">Enqueue</button>
                                         </form>
 
                                         <form method="post" action="{{ route('room-cleaning-queue.clean') }}">
                                             @csrf
-                                            <button type="submit">Clean Next Room</button>
+                                            <button class="btn btn-primary" type="submit">Clean Next Room</button>
                                         </form>
 
                                         <h2>Queue:</h2>
                                         <ul>
-                                            @foreach($queue->toArray() as $room)
-                                                <li>Room : {{$room}}</li>
-                                            @endforeach
+                                            @if (!empty($sessionList))
+                                                <ul>
+                                                    @php
+                                                        $currentNode = $sessionList;
+                                                        while ($currentNode !== null) {
+                                                            echo '<li>' . 'Room: ' . $currentNode['data'] . '</li>';
+                                                            $currentNode = $currentNode['next'];
+                                                        }
+                                                    @endphp
+                                                </ul>
+                                            @else
+                                                <p>The linked list is empty.</p>
+                                            @endif
+
                                         </ul>
 
                                     </div>

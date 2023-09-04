@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\GuestCheckInOutController;
 use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\PunctualityController;
 use App\Http\Controllers\Admin\RoomController;
@@ -86,6 +87,12 @@ Route::group(['prefix' => 'attendance'], function () {
     Route::get('delete/{id}', [AttendanceController::class,'destroy'])->name('admin.attendance.delete');
     Route::get('edit/{id}', [AttendanceController::class,'edit'])->name('admin.attendance.edit');
     Route::post('update/{id}', [AttendanceController::class,'update'])->name('admin.attendance.update');
+});
+################################## end Attendance    #######################################
+################################## Attendance routes ######################################
+Route::group(['prefix' => 'guest-booking'], function () {
+    Route::get('create', [GuestCheckInOutController::class,'create'])->name('admin.guest-booking.create');
+    Route::post('store', [GuestCheckInOutController::class,'store'])->name('admin.guest-booking.store');
 });
 ################################## end Attendance    #######################################
 

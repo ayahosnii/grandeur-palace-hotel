@@ -70,6 +70,7 @@
                                             <div class="row">
                                                 <div class="col-lg-3 col-md-6" v-for="room in group" :key="room.id">
                                                     <input type="checkbox" name="room" class="image-radio" @click="toggleRoomSelection(room.id)">
+                                                    <p v-for="availableRoomCount in availableRoomCounts">{{availableRoomCount}}</p>
                                                     <div class="hp-room-item set-bg" :data-setbg="`${asset}/${room.image}`"  :style="'background-image: url(' + asset + '/' + room.image + ')'">
                                                         <div class="hr-text">
                                                             <h3>{{ room.room_type }}</h3>
@@ -193,6 +194,7 @@ export default {
                 new Date(new Date().getTime() + 9 * 24 * 60 * 60 * 1000)],
             steps: {},
             step: 1,
+            availableRoomCounts: [],
             rooms: [],
             customer: {
                 firstName: "",
@@ -304,7 +306,8 @@ export default {
                     console.log(this.selectedDate.start);
                     console.log(this.selectedDate.end);
                     this.rooms = response.data.rooms;
-                    console.log(response.data.rooms);
+                    this.availableRoomCounts = response.data.availableRoomCounts;
+                    console.log(response.data);
                 })
                 .catch((error) => {
                     // Code to handle an error response

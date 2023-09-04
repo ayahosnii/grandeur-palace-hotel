@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
-            $table->id();
-            $table->dateTime('check_in');
-            $table->dateTime('check_out');
-            $table->unsignedBigInteger('customer_id');
-            $table->timestamps();
-
-            $table->foreign('customer_id')->references('id')->on('customers');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->date('subscription_end_date')->nullable();
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        Schema::table('customers', function (Blueprint $table) {
+            //
+        });
     }
 };
