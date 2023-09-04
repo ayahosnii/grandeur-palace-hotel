@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Booking\CalculateAvailableRooms;
 use App\Models\admin\BookingRoomPivot;
 use App\Models\admin\Room;
 use App\Models\admin\RoomsWithNumber;
@@ -53,16 +54,20 @@ class RoomAvailabilityChecker
     }
 
 
-    public static function isRoomAvailable($roomId, $formCheckIn, $formCheckOut)
+    public static function isRoomAvailable($roomIds, $quantities, $checkInDate, $checkOutDate)
     {
-        $checkInDate = Carbon::parse($formCheckIn);
-        $checkOutDate = Carbon::parse($formCheckOut);
+        $calAvailableRooms = new CalculateAvailableRooms();
+        $roomInfo = $calAvailableRooms->calculateAvailableRooms($roomIds, $quantities, $checkInDate, $checkOutDate);
 
-        $bookedRoomIds = BookingRoomPivot::whereHas('booking', function ($query) use ($checkInDate, $checkOutDate) {
-            $query->whereBetween('check_in', [$checkInDate, $checkOutDate])
-                ->orWhereBetween('check_out', [$checkInDate, $checkOutDate]);
-        })->pluck('room_id');
+        $availableRoomCount = $roomInfo['availableRoomCount'];
+        $quantity = $roomInfo['quantity'];
 
-        return !in_array($roomId, $bookedRoomIds->toArray());
+        if ($availableRoomCount >= $quantity) {
+            return 'There are ' . $availableRoomCount . ' rooms available';
+        } else {
+            throw new \InvalidArgumentException("There are no available rooms for this room type in this date range.");
+        }
     }
+
+
 }

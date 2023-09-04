@@ -193,7 +193,7 @@ class RoomController extends Controller
         $checkOutDate = Carbon::parse($formCheckOut);
 
         // Get All Rooms with their room types
-        $roomsWithNumbers = RoomsWithNumber::where('available', 1)->pluck('room_id');
+        $roomsWithNumbers = RoomsWithNumber::pluck('room_id');
 
         $bookedRoomIds = BookingRoomPivot::whereHas('booking', function ($query) use ($checkInDate, $checkOutDate) {
             $query->whereBetween('check_in', [$checkInDate, $checkOutDate])
@@ -239,13 +239,18 @@ class RoomController extends Controller
             return response()->json(['message' => 'You can\'t check this room. Check-in or check-out is in the past.']);
         }
 
-        $isRoomAvailable = RoomAvailabilityChecker::isRoomAvailable($roomId, $checkIn, $checkOut);
+        try {
+            $roomIds = [$roomId];
+            $quantities = [1];
+            $isRoomAvailable = RoomAvailabilityChecker::isRoomAvailable($roomIds, $quantities, $checkIn, $checkOut);
 
-
-        if ($isRoomAvailable) {
-            return response()->json(['message' => 'This room is available']);
-        } else {
-            return response()->json(['message' => 'This room is not available']);
+            if ($isRoomAvailable) {
+                return response()->json(['message' => $isRoomAvailable]);
+            } else {
+                return response()->json(['message' => $isRoomAvailable]);
+            }
+        } catch (\InvalidArgumentException $e) {
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Booking\CalculateAvailableRooms;
 use App\Helpers\GuestCheckInOut\CheckInOut;
 use App\Helpers\GuestCheckInOut\Discounts\EarlyBirdDiscount;
 use App\Helpers\GuestCheckInOut\Discounts\NoDiscount;
@@ -80,39 +81,14 @@ class BookingService
 
     private function getAvailableRoomsForQuantity($roomIds, $quantities, $checkInDate, $checkOutDate)
     {
-        $availableRooms = [];
+        $calAvailableRooms = new CalculateAvailableRooms();
+        $roomInfo = $calAvailableRooms->calculateAvailableRooms($roomIds, $quantities, $checkInDate, $checkOutDate);
 
-        // Iterate through roomIds and quantities together
-        foreach (array_combine($roomIds, $quantities) as $roomId => $quantity) {
-            // Retrieve the room
-            $room = Room::find($roomId);
 
-            if (!$room) {
-                return "Invalid room ID";
-            }
-
-            $allRoomCount = RoomsWithNumber::where('room_id', $room->id)->count();
-
-            // Retrieve the number of booked rooms within the date range
-            $bookedRoomCount = RoomsWithNumber::with('room')->where('room_id', $room->id)
-                ->whereHas('bookings', function ($query) use ($checkInDate, $checkOutDate) {
-                    // Check if the room is booked for the specified date range
-                    $query->whereBetween('check_in', [$checkInDate, $checkOutDate])
-                        ->orWhereBetween('check_out', [$checkInDate, $checkOutDate]);
-                })
-                ->count();
-
-            $bookedRoomIds = RoomsWithNumber::with('room')->where('room_id', $room->id)
-                ->whereHas('bookings', function ($query) use ($checkInDate, $checkOutDate) {
-                    // Check if the room is booked for the specified date range
-                    $query->whereBetween('check_in', [$checkInDate, $checkOutDate])
-                        ->orWhereBetween('check_out', [$checkInDate, $checkOutDate]);
-                })
-                ->pluck('id')
-                ->toArray();
-
-            // Calculate the available room count
-            $availableRoomCount = $allRoomCount - $bookedRoomCount;
+        $availableRoomCount = $roomInfo['availableRoomCount'];
+        $quantity = $roomInfo['quantity'];
+        $bookedRoomIds = $roomInfo['bookedRoomIds'];
+        $roomId = $roomInfo['roomId'];
 
             if ($availableRoomCount >= $quantity) {
                 // Retrieve available rooms within the specified date range
@@ -127,7 +103,6 @@ class BookingService
             } else {
                 throw new \InvalidArgumentException("Not enough available rooms for room ID $roomId in this date range.");
             }
-        }
 
         return $availableRooms;
     }
