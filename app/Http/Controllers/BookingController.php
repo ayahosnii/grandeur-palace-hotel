@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BookingService;
+use App\Helpers\GuestCheckInOut\Discounts\EarlyBirdDiscount;
+use App\Helpers\GuestCheckInOut\Discounts\NoDiscount;
+use App\Helpers\GuestCheckInOut\VIPCheckInOut;
 use App\Http\Requests\BookingRequest;
 use App\Mail\BookingConfirmation;
 use App\Models\Booking;
@@ -37,105 +41,111 @@ class BookingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(BookingRequest $request)
     {
         DB::beginTransaction();
 
-        $validator = Validator::make($request->all(), [
-            'customer.firstname' => 'required|string',
-            'customer.lastname' => 'required|string',
-            'customer.phone' => 'required',
-            'customer.email' => 'required|email|unique:customers,email',
-        ]);
+        try {
 
-        $now = Carbon::now();
+            $validator = Validator::make($request->all(), [
+                'customer.firstname' => 'required|string',
+                'customer.lastname' => 'required|string',
+                'customer.phone' => 'required',
+                'customer.email' => 'required|email',
+            ]);
 
-        $checkIn = Carbon::parse($request->input('check_in'));
-        $checkOut = Carbon::parse($request->input('check_out'));
+            $paymentDate = Carbon::now();
+            $checkInDate = Carbon::parse($request->input('check_in'));
+            $checkOutDate = Carbon::parse($request->input('check_out'));
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
-        }
+            // Check if validation fails
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 400);
+            }
 
-        // Get the roomId(s) from the request
-        $roomIds = $request->input('roomId');
+                $customer = new Customer([
+                    'firstname' => $request->input('customer.firstname'),
+                    'lastname' => $request->input('customer.lastname'),
+                    'phone' => $request->input('customer.phone'),
+                    'email' => $request->input('customer.email'),
+                ]);
+                $customer->save();
 
-        // Check if $roomIds is an array (multiple values) or a single value
-        if (!is_array($roomIds)) {
-            $roomIds = [$roomIds]; // Convert single value to an array
-        }
+            // Get the roomId(s) from the request
+            $roomIds = $request->input('roomId');
 
-        // Loop through each roomId to create bookings
-        foreach ($roomIds as $roomId) {
-            // Your booking creation logic for each $roomId here
+            // Check if $roomIds is an array (multiple values) or a single value
+            if (!is_array($roomIds)) {
+                $roomIds = [$roomIds]; // Convert single value to an array
+            }
 
+            $quantities = [1];
             $bookingCode = mt_rand(10000, 99999);
 
-            // Check if check-in or check-out is in the past
+            // Create a booking record
+            $booking = new Booking;
+            $booking->booking_code = $bookingCode;
+            $booking->customer_id = $customer->id;
+            $booking->check_in = $checkInDate;
+            $booking->check_out = $checkOutDate;
+            $booking->payment_date = $paymentDate;
+            $booking->save();
 
-            if ($checkIn <= $now || $checkOut <= $now) {
-                return response()->json(['message' => 'You can\'t book this room. Check-in or check-out is in the past.']);
-            }
+            $bookingService = new BookingService();
+            // Calculate the total price for the booking
+            $totalPrice = $bookingService->bookRooms($roomIds, $quantities, $booking, $checkInDate, $checkOutDate);
 
-            // Get all bookings for the specified room
-            $bookingsForRoom = Booking::where('room_id', $roomId)->get();
+            // Determine which discount to apply based on the check-in date
+            $discountPromotion = $this->shouldApplyEarlyBirdDiscount($paymentDate, $checkInDate)
+                ? new EarlyBirdDiscount()
+                : new NoDiscount();
 
-            // Check if the room is available for the requested dates
-            $isRoomAvailable = true;
+            $checkInOut = new VIPCheckInOut($checkInDate, $checkOutDate, $totalPrice, $discountPromotion);
 
-            foreach ($bookingsForRoom as $booking) {
-                $bookingCheckIn = Carbon::parse($booking->check_in);
-                $bookingCheckOut = Carbon::parse($booking->check_out);
+            // Calculate total cost before and after discount
+            $totalCostBeforeDiscount = $totalPrice;
+            $totalCostAfterDiscount = $checkInOut->applyDiscount($checkInOut->totalCost());
 
-                if (
-                    $checkIn >= $bookingCheckIn && $checkIn < $bookingCheckOut ||
-                    $checkOut > $bookingCheckIn && $checkOut <= $bookingCheckOut
-                ) {
-                    $isRoomAvailable = false;
-                    break;
-                }
-            }
+            $booking->total_price = $totalCostAfterDiscount;
+            $booking->save();
 
-            if ($isRoomAvailable) {
-                // Check if the customer already exists by email
-                $customer = Customer::where('email', $request->input('customer.email'))->first();
+            // Commit the database transaction
+            DB::commit();
 
-                // If the customer doesn't exist, create a new one
-                if (!$customer) {
-                    $customer = new Customer([
-                        'firstname' => $request->input('customer.firstname'),
-                        'lastname' => $request->input('customer.lastname'),
-                        'phone' => $request->input('customer.phone'),
-                        'email' => $request->input('customer.email'),
-                    ]);
-                    $customer->save();
-                }
+            // Return a success response with booking details
+            return response()->json([
+                'message' => 'Check-in successful',
+                'total_cost_before_discount' => $totalCostBeforeDiscount,
+                'total_cost_after_discount' => $totalCostAfterDiscount,
+                'discountPromotion' => $discountPromotion,
+            ]);
+        } catch (\Exception $e) {
+            // If an exception is thrown, roll back the transaction to cancel any changes
+            DB::rollBack();
 
-                // Create a new booking associated with the customer
-                $booking = new Booking([
-                    'check_in' => $checkIn,
-                    'check_out' => $checkOut,
-                    'booking_code' => $bookingCode,
-                    'customer_id' => $customer->id,
-                    'room_id' => $roomId
-                ]);
-                $booking->save();
-            } else {
-                DB::rollBack();
-                // The room is not available for the requested dates
-                return response()->json(['message' => 'This room is not available for the selected dates']);
-            }
+            // Handle the exception (e.g., log it or return an error response)
+            return response()->json(['error' => $e->getMessage()], 500);
         }
+
         Mail::to($customer->email)->send(new BookingConfirmation($bookingCode));
 
         DB::commit();
 
         return response()->json(['message' => 'Booking(s) created successfully']);
     }
+
+
+
+    public function shouldApplyEarlyBirdDiscount($checkIn, $paymentDate)
+    {
+        $checkInTime = Carbon::parse($checkIn);
+        $paymentDate = Carbon::parse($paymentDate);
+        return $checkInTime->diffInDays($paymentDate) >= 30;
+    }
+
     /**
      * Display the specified resource.
      *
