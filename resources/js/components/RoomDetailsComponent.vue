@@ -363,6 +363,7 @@ export default {
                     rating: this.rating,
                     newComment: this.newComment,
                     roomId: this.roomId,
+                    rating_type: 2
                 })
                 .then((response) => {
                     console.log('Review submitted successfully');
@@ -374,8 +375,8 @@ export default {
                 })
                 .catch((error) => {
                     console.error('Error submitting review:', error);
-                    $toast.error('Error submitting review:', error);
-                    console.error(error.response.data.message);
+                    $toast.error(error.response.data.error);
+                    console.error(error.response.data);
                 });
         },
     },

@@ -885,7 +885,6 @@ ul, ol {
 
 .services-section {
 	padding-bottom: 60px;
-	border-top: 1px solid #e5e5e5;
 }
 .services-section .section-title {
 	margin-bottom: 36px;
@@ -1322,25 +1321,26 @@ ul, ol {
 	padding-bottom: 70px;
 }
 .about-page-text {
+	margin-top: 65px;
 	margin-bottom: 65px;
 }
 .about-page-text .ap-title {
 	margin-bottom: 30px;
 }
-.about-page-text .ap-title h2 {
-	font-size: 44px;
-	color: #19191a;
+.about-page-text .ap-title h3 {
+	font-size: 35px;
+	color: #d6aa4c;
 	margin-bottom: 18px;
 }
 .about-page-text .ap-title p {
 	font-size: 18px;
-	color: #707079;
+	color: #d4d4e6;
 	line-height: 28px;
 }
 .about-page-text .ap-services li {
 	list-style: none;
 	font-size: 20px;
-	color: #707079;
+	color: #d4d4e6;
 	line-height: 42px;
 }
 .about-page-text .ap-services li i {

@@ -10,6 +10,10 @@ import RoomDetailsComponent from "./components/RoomDetailsComponent.vue";
 import RoomFilters from './components/RoomFilters.vue';
 import FullCalendarComponent from './components/FullCalendarComponent.vue';
 import SlidesComponent from "./components/SlidesComponent.vue";
+import ReviewsComponent from "./components/ReviewsComponent.vue";
+import ContactComponent from "./components/ContactComponent.vue";
+import GalaryComponent from "./components/GalaryComponent.vue";
+import VuePictureSwipe from 'vue3-picture-swipe';
 import Main from './App.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
@@ -49,11 +53,16 @@ app.component('room-component', RoomComponent);
 app.component('room-details-component', RoomDetailsComponent);
 app.component('room-filters', RoomFilters);
 app.component('slides-component', SlidesComponent);
+app.component('reviews-component', ReviewsComponent);
+app.component('contact-component', ContactComponent);
+app.component('galary-component', GalaryComponent);
 app.component('calendar-component', CalendarComponent);
 app.component('fullcalendar-component', FullCalendarComponent);
 app.component('VueDatePicker', VueDatePicker);
 app.component('Datepicker', VueDatepickerUi)
 app.component('VCalendar', VCalendar)
+app.component('vue-picture-swipe', VuePictureSwipe);
+
 app.use(ToastPlugin);
 //app.component('star-rating', VueStarRating.default);
 app.component('Modal', Modal)

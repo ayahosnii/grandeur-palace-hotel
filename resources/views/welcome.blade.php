@@ -39,43 +39,14 @@
                 </div>
                 <div class="row">
                     @foreach($services as $service)
-                        <div class="col-lg-2 col-sm-6">
+                        <div class="col-lg-3 col-sm-6">
                             <div class="service-item">
                                 <i style="font-size: 40px" class="{{$service->icon_class}}"></i>
                                 <h4>{{$service->name}}</h4>
+                                <p style="color: #cdcdcd">{{$service->description}}</p>
                             </div>
                         </div>
                     @endforeach
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="service-item">
-                            <i class="flaticon-033-dinner"></i>
-                            <h4>Catering Service</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="service-item">
-                            <i class="flaticon-026-bed"></i>
-                            <h4>Babysitting</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="service-item">
-                            <i class="flaticon-024-towel"></i>
-                            <h4>Laundry</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="service-item">
-                            <i class="flaticon-044-clock-1"></i>
-                            <h4>Hire Driver</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6">
-                        <div class="service-item">
-                            <i class="flaticon-012-cocktail"></i>
-                            <h4>Bar & Drink</h4>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -92,8 +63,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-title">
-                            <span>What We Do</span>
-                            <h2>Discover Our Services</h2>
+                            <span>Our</span>
+                            <h2>Restaurant</h2>
                         </div>
                     </div>
                 </div>
@@ -101,16 +72,8 @@
                     <div class="container-fluid">
                         <div class="hp-services-items">
                             <div class="row">
-                                <div class="col-lg-6 col-md-12">
-                                    <div class="hp-services-item set-bg" data-setbg="{{asset('assets/img/room/spa.jpg')}}">
-                                        <div class="hr-text">
-                                            <h3>Spa</h3>
-                                            <a href="{{route('restaurant')}}" class="primary-btn">More Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-12">
-                                    <div class="hp-services-item set-bg" data-setbg="{{asset('assets/img/room/restaurant.jpg')}}">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="hp-services-item set-bg" data-setbg="{{asset('assets/img/restaurant/the-restaurant.jpg')}}">
                                         <div class="hr-text">
                                             <h3>Restaurant</h3>
                                             <a href="{{route('restaurant')}}" class="primary-btn">More Details</a>
@@ -163,57 +126,19 @@
         <!-- Testimonial Section Begin -->
         <section class="testimonial-section spad">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title">
-                            <span>Testimonials</span>
-                            <h2>What Customers Say?</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 offset-lg-2">
-                        <div class="testimonial-slider owl-carousel">
-                            <div class="ts-item">
-                                <p>After a construction project took longer than expected, my husband, my daughter and I
-                                    needed a place to stay for a few nights. As a Chicago resident, we know a lot about our
-                                    city, neighborhood and the types of housing options available and absolutely love our
-                                    vacation at Sona Hotel.</p>
-                                <div class="ti-author">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <h5> - Alexander Vasquez</h5>
-                                </div>
-                                <img src="{{asset('assets/img/testimonial-logo.png')}}" alt="">
-                            </div>
-                            <div class="ts-item">
-                                <p>After a construction project took longer than expected, my husband, my daughter and I
-                                    needed a place to stay for a few nights. As a Chicago resident, we know a lot about our
-                                    city, neighborhood and the types of housing options available and absolutely love our
-                                    vacation at Sona Hotel.</p>
-                                <div class="ti-author">
-                                    <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
-                                    </div>
-                                    <h5> - Alexander Vasquez</h5>
-                                </div>
-                                <img src="{{asset('assets/img/testimonial-logo.png')}}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <reviews-component />
             </div>
         </section>
         <!-- Testimonial Section End -->
+
+        <!-- Contact us Section Begin -->
+
+        <section class="aboutus-section spad">
+            <div class="container">
+                <contact-component />
+            </div>
+        </section>
+
 
     </div>
 @endsection

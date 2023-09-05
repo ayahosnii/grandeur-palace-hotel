@@ -66,21 +66,17 @@ class BookingController extends Controller
                 return response()->json(['errors' => $validator->errors()], 400);
             }
 
-                $customer = new Customer([
-                    'firstname' => $request->input('customer.firstname'),
-                    'lastname' => $request->input('customer.lastname'),
-                    'phone' => $request->input('customer.phone'),
-                    'email' => $request->input('customer.email'),
-                ]);
-                $customer->save();
+            // Create a new customer
+            $customer = Customer::create([
+                'firstname' => $request->input('customer.firstname'),
+                'lastname' => $request->input('customer.lastname'),
+                'phone' => $request->input('customer.phone'),
+                'email' => $request->input('customer.email'),
+            ]);
 
             // Get the roomId(s) from the request
-            $roomIds = $request->input('roomId');
+            $roomIds = (array)$request->input('roomId'); // Ensure it's an array
 
-            // Check if $roomIds is an array (multiple values) or a single value
-            if (!is_array($roomIds)) {
-                $roomIds = [$roomIds]; // Convert single value to an array
-            }
 
             $quantities = [1];
             $bookingCode = mt_rand(10000, 99999);
@@ -94,7 +90,9 @@ class BookingController extends Controller
             $booking->payment_date = $paymentDate;
             $booking->save();
 
+            // Create an instance of BookingService
             $bookingService = new BookingService();
+
             // Calculate the total price for the booking
             $totalPrice = $bookingService->bookRooms($roomIds, $quantities, $booking, $checkInDate, $checkOutDate);
 

@@ -27,6 +27,7 @@ Route::get('/reservation', [RoomController::class, 'reservation'])->name('reserv
 Route::get('/rooms/{id}', [RoomController::class, 'details'])->name('rooms.details');
 
 Route::get('/restaurant', [RestaurantController::class, 'front'])->name('restaurant');
+Route::get('/about-us', [RestaurantController::class, 'about'])->name('about');
 
 
 Route::get('/api/bookings', [RoomController::class, 'bookingsApi'])->name('bookings.api');

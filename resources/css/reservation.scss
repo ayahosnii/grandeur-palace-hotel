@@ -9,7 +9,7 @@ $color-white: #fff;
 $color-dark: #676767;
 $color-gray: #cecece;
 $color-lightgray: #ededed;
-$color-jungle: #362f29;
+$color-jungle: #2a2a2a;
 
 /* FONT */
 $font-montserrat: "Montserrat", sans-serif;
@@ -60,7 +60,7 @@ body {
     margin: auto;
     padding: 3rem;
     border-radius: 4rem;
-    background: linear-gradient(145deg, #362f29, #362f29);
+    background: linear-gradient(145deg, #2a2a2a, #2a2a2a);
 
     &-icon {
         display: flex;
