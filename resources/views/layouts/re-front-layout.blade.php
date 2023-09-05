@@ -66,7 +66,7 @@
     </div>
     <div class="header-configure-area">
         <div class="language-option">
-            <img src="img/flag.jpg" alt="">
+            <img src="{{asset('assets/img/flag.jpg')}}" alt="">
             <span>EN <i class="fa fa-angle-down"></i></span>
             <div class="flag-dropdown">
                 <ul>

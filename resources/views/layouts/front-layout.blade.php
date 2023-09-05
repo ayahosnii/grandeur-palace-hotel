@@ -47,7 +47,7 @@
     </div>
     <div class="header-configure-area">
         <div class="language-option">
-            <img src="img/flag.jpg" alt="">
+            <img src="{{asset('assets/img/flag.jpg')}}" alt="">
             <span>EN <i class="fa fa-angle-down"></i></span>
             <div class="flag-dropdown">
                 <ul>
@@ -62,16 +62,16 @@
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="{{route('rooms')}}">Rooms</a></li>
-            <li><a href="./about-us.html">About Us</a></li>
-<!--            <li><a href="./pages.html">Pages</a>
-                <ul class="dropdown">
-                    <li><a href="./room-details.html">Room Details</a></li>
-                    <li><a href="#">Deluxe Room</a></li>
-                    <li><a href="#">Family Room</a></li>
-                    <li><a href="#">Premium Room</a></li>
-                </ul>
-            </li>-->
-            <li><a href="./blog.html">News</a></li>
+            <li><a href="{{route('about')}}">About Us</a></li>
+            <!--            <li><a href="./pages.html">Pages</a>
+                            <ul class="dropdown">
+                                <li><a href="./room-details.html">Room Details</a></li>
+                                <li><a href="#">Deluxe Room</a></li>
+                                <li><a href="#">Family Room</a></li>
+                                <li><a href="#">Premium Room</a></li>
+                            </ul>
+                        </li>-->
+            <li><a href="{{route('restaurant')}}">Restaurant</a></li>
             <li><a href="./contact.html">Contact</a></li>
         </ul>
     </nav>
