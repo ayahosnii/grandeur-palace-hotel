@@ -48,9 +48,6 @@
 
 <body style="background-color: #2a2a2a;">
 <!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
 
 <!-- Offcanvas Menu Section Begin -->
 <div class="offcanvas-menu-overlay"></div>
