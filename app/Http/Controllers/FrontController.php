@@ -19,7 +19,7 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $services = Service::where('display_on_homepage', 1)->get();
+        $services = Service::where('display_on_homepage', 1)->get()->random(4);
         return view('welcome', compact('services'));
     }
 

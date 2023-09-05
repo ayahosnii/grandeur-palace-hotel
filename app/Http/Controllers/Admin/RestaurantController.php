@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\admin\Meal;
 use App\Models\cr;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -12,14 +13,27 @@ class RestaurantController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function front()
     {
-        $meals = Meal::where('category', 'breakfast')->get();
-        $count = $meals->count() / 2;
-        $mealsChunks = $meals->chunk($count);
-        return view('restaurant', compact('mealsChunks'));
+        $breakFastMeals = Meal::where('category', 'breakfast')->get();
+        $count = $breakFastMeals->count() / 2;
+        $breakFastChunks = $breakFastMeals->chunk($count);
+
+        $lunchMeals = Meal::where('category', 'lunch')->get();
+        $count = $lunchMeals->count() / 2;
+        $lunchChunks = $lunchMeals->chunk($count);
+
+        $dinnerMeals = Meal::where('category', 'dinner')->get();
+        $count = $dinnerMeals->count() / 2;
+        $dinnerChunks = $dinnerMeals->chunk($count);
+
+        return view('restaurant', [
+            'breakFastChunks' => $breakFastChunks,
+            'lunchChunks' => $lunchChunks,
+            'dinnerChunks' => $dinnerChunks
+        ]);
     }
 
     /**
@@ -29,7 +43,8 @@ class RestaurantController extends Controller
      */
     public function about()
     {
-        return view('about');
+        $services = Service::where('display_on_homepage', 1)->get()->random(4);
+        return view('about', ['services' => $services]);
     }
 
     /**
@@ -38,9 +53,9 @@ class RestaurantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function contact()
     {
-        //
+        return view('contact');
     }
 
     /**

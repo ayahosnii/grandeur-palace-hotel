@@ -2188,20 +2188,20 @@ ul, ol {
 }
 .contact-text h2 {
 	font-size: 44px;
-	color: #19191a;
+	color: #d6aa4c;
 	margin-bottom: 24px;
 }
 .contact-text p {
-	color: #707079;
+	color: #d4d4e6;
 }
 .contact-text table tbody tr td {
 	font-size: 16px;
-	color: #19191a;
+	color: #d4d4e6;
 	line-height: 36px;
 	font-weight: 500;
 }
 .contact-text table tbody tr td.c-o {
-	color: #707079;
+	color: #d6aa4c;
 	width: 75px;
 }
 .contact-form input {

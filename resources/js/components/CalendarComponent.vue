@@ -138,6 +138,6 @@ const date = ref(new Date());
     height: 8px;
     width: 8px;
     border-radius: 100%;
-    background-color: rgba(161, 127, 58, 0.66);
+    background-color: #d6b770;
 }
 </style>

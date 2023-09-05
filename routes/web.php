@@ -28,26 +28,7 @@ Route::get('/rooms/{id}', [RoomController::class, 'details'])->name('rooms.detai
 
 Route::get('/restaurant', [RestaurantController::class, 'front'])->name('restaurant');
 Route::get('/about-us', [RestaurantController::class, 'about'])->name('about');
-
-
-Route::get('/api/bookings', [RoomController::class, 'bookingsApi'])->name('bookings.api');
-Route::get('/api/all-bookings', [RoomController::class, 'allBookingsApi'])->name('all.bookings.api');
-
-Route::get('/api/rooms', [RoomController::class, 'roomsApi'])->name('rooms.details.api');
-Route::get('/api/rooms-details', [RoomController::class, 'roomsDetailsApi'])->name('rooms.api');
-
-Route::get('/api/reviews', [RoomController::class, 'reviewsApi'])->name('reviews.api');
-Route::post('/api/storeReviews', [RoomController::class, 'storeReviews'])->name('rooms.store.reviews');
-
-Route::get('/api/check-rooms-availability', [RoomController::class, 'checkAvailability'])->name('rooms.checkAvailability.api');
-Route::get('/api/check-the-room-availability', [RoomController::class, 'checkTheRoomAvailability'])->name('rooms.checkTheRoomAvailability.api');
-
-Route::get('/api/services', [RoomController::class, 'servicesApi'])->name('services.api');
-
-Route::post('/api/bookings/store', [BookingController::class, 'store'])->name('bookings.store.api');
-
-Route::get('/guest-booking', [FrontController::class, 'Standard'])->name('bookings.guest');
-
+Route::get('/contact-us', [RestaurantController::class, 'contact'])->name('contact');
 ################################## Rooms Cleaning Queue routes ######################################
 Route::group(['prefix' => 'room-cleaning-queue'], function () {
     Route::get('/', [RoomCleaningQueueController::class, 'index'])->name('room-cleaning-queue.index');
