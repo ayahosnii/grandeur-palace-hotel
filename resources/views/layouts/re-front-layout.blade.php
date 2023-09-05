@@ -59,10 +59,7 @@
 </div>
 <div class="offcanvas-menu-wrapper">
     <div class="canvas-close">
-        <i class="icon_close"></i>
-    </div>
-    <div class="search-icon  search-switch">
-        <i class="icon_search"></i>
+        X
     </div>
     <div class="header-configure-area">
         <div class="language-option">
@@ -70,8 +67,7 @@
             <span>EN <i class="fa fa-angle-down"></i></span>
             <div class="flag-dropdown">
                 <ul>
-                    <li><a href="#">Zi</a></li>
-                    <li><a href="#">Fr</a></li>
+                    <li><a href="#">Ar (Soon)</a></li>
                 </ul>
             </div>
         </div>
