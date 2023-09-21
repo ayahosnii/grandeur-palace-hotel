@@ -155,7 +155,7 @@
 
                                         </div>
                                     </div>
-                                    <textarea v-model="newComment" placeholder="Your Review"></textarea>
+                                    <textarea v-model="message" placeholder="Your Review"></textarea>
                                     <button type="submit" >Submit Now</button>
                                 </div>
                             </div>
@@ -209,7 +209,7 @@ export default {
             rating: 0,
             clients: [],
             averageRating: 0,
-            newComment: '',
+            message: '',
             bookingCode: '',
             selectedDate: [
                 new Date(),
@@ -351,7 +351,7 @@ export default {
         postStoreReviews() {
             console.log(this.rating)
             // Validation: Ensure booking code and review are not empty
-            if (!this.bookingCode || !this.newComment) {
+            if (!this.bookingCode || !this.message) {
                 $toast.warning('Please fill in all fields');
                 return;
             }
@@ -361,7 +361,7 @@ export default {
                 .post('/api/storeReviews', {
                     bookingCode: this.bookingCode,
                     rating: this.rating,
-                    newComment: this.newComment,
+                    message: this.message,
                     roomId: this.roomId,
                     rating_type: 2
                 })
@@ -371,7 +371,7 @@ export default {
                     console.log(response);
                     this.bookingCode = '';
                     this.ratingValue = 0;
-                    this.newComment = '';
+                    this.message = '';
                 })
                 .catch((error) => {
                     console.error('Error submitting review:', error);

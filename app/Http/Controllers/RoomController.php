@@ -127,25 +127,27 @@ class RoomController extends Controller
 
         $reviewType = $request->input('rating_type');
 
-        $booking = Booking::where('booking_code', $request->input('bookingCode'))->first();
+        if ($reviewType == 1 || 2) {
+            $booking = Booking::where('booking_code', $request->input('bookingCode'))->first();
 
-        if (!$booking) {
-            return response()->json(['error' => 'Booking not found'], 404);
-        }
-
-        if ($reviewType == 2) {  // Only perform the room booking check for room reviews
-            $matchingRoom = $booking->rooms->first(function ($room) use ($request) {
-                return $room->room_id == $request->input('roomId');
-            });
-
-            if (!$matchingRoom) {
-                return response()->json(['error' => 'You booked another room'], 400);
+            if (!$booking) {
+                return response()->json(['error' => 'Booking not found'], 404);
             }
 
-            $existingReview = Review::where('booking_code', $request->input('bookingCode'))->first();
+            if ($reviewType == 2) {
+                $matchingRoom = $booking->rooms->first(function ($room) use ($request) {
+                    return $room->room_id == $request->input('roomId');
+                });
 
-            if ($existingReview) {
-                return response()->json(['error' => 'You have already reviewed with this booking code'], 400);
+                if (!$matchingRoom) {
+                    return response()->json(['error' => 'You booked another room'], 400);
+                }
+
+                $existingReview = Review::where('booking_code', $request->input('bookingCode'))->first();
+
+                if ($existingReview) {
+                    return response()->json(['error' => 'You have already reviewed with this booking code'], 400);
+                }
             }
         }
 
@@ -155,7 +157,7 @@ class RoomController extends Controller
             'booking_id' => $booking->id,
             'booking_code' => $request->input('bookingCode'),
             'rating' => $request->input('rating'),
-            'review_text' => $request->input('newComment'),
+            'review_text' => $request->input('message'),
             'review_type' => $reviewType,
         ]);
 

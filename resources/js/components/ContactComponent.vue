@@ -42,7 +42,7 @@
                                         <input v-model="isReview" type="radio" value="false">
                                     </div>
                                     <div class="col-sm-12 my-3">
-                                        <textarea v-model="newComment" class="form-control" placeholder="Message" rows="4" cols="50"></textarea>
+                                        <textarea v-model="message" class="form-control" placeholder="Message" rows="4" cols="50"></textarea>
                                     </div>
                                     <div class="col-sm-12">
                                         <button type="submit" class="room-btn">Send</button>
@@ -88,7 +88,7 @@ export default {
         submitForm() {
             if (this.isReview === "true") {
                 // Handle the review submission
-                if (!this.rating || !this.newComment) {
+                if (!this.rating || !this.message) {
                     $toast.warning("Please fill in all review fields");
                     return;
                 }
@@ -97,7 +97,7 @@ export default {
                     .post('/api/storeReviews', {
                         bookingCode: this.bookingCode,
                         rating: this.rating,
-                        newComment: this.newComment,
+                        message: this.message,
                         rating_type: 1
                     })
                     .then((response) => {
@@ -106,7 +106,7 @@ export default {
                         console.log(response);
                         this.bookingCode = '';
                         this.ratingValue = 0;
-                        this.newComment = '';
+                        this.message = '';
                     })
                     .catch((error) => {
                         console.error('Error submitting review:', error);
@@ -127,7 +127,7 @@ export default {
                         message: this.message,
                     })
                     .then((response) => {
-                        console.log("Contact message sent successfully");
+                        console.log(response);
                         $toast.success("Contact message sent successfully");
                         // Reset form fields
                         this.name = "";

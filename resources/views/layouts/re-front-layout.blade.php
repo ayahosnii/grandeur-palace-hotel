@@ -84,7 +84,7 @@
                 </ul>
             </li>-->
             <li><a href="{{route('restaurant')}}">Restaurant</a></li>
-            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="{{route('contact')}}">Contact</a></li>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -125,7 +125,7 @@
                                     </ul>
                                 </li>-->
                                 <li><a href="{{route('restaurant')}}">Restaurant</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
+                                <li><a href="{{route('contact')}}">Contact</a></li>
                                 <li><a href="{{url('/reservation')}}" class="bk-btn">Booking Now</a></li>
                             </ul>
                         </nav>

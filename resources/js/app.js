@@ -55,6 +55,7 @@ app.component('room-filters', RoomFilters);
 app.component('slides-component', SlidesComponent);
 app.component('reviews-component', ReviewsComponent);
 app.component('contact-component', ContactComponent);
+app.component('restaurant-forms-component', RestaurantFormsComponent);
 app.component('galary-component', GalaryComponent);
 app.component('calendar-component', CalendarComponent);
 app.component('fullcalendar-component', FullCalendarComponent);
@@ -76,6 +77,7 @@ app.use(VCalendar, {})
 import {useToast} from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import HomeComponent from "./components/HomeComponent.vue";
+import RestaurantFormsComponent from "@/components/RestaurantFormsComponent.vue";
 const $toast = useToast();
 
 let instance = $toast.success('You did it!');

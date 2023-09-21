@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +28,10 @@ Route::get('/rooms-details', [RoomController::class, 'roomsDetailsApi'])->name('
 
 Route::get('/reviews', [RoomController::class, 'reviewsApi'])->name('reviews.api');
 Route::post('/storeReviews', [RoomController::class, 'storeReviews'])->name('rooms.store.reviews');
+
+
+Route::post('/contact', [ContactUsController::class, 'store'])->name('rooms.store.contact');
+Route::post('/bookTable', [RestaurantController::class, 'store'])->name('rooms.store.contact');
 
 Route::get('/check-rooms-availability', [RoomController::class, 'checkAvailability'])->name('rooms.checkAvailability.api');
 Route::get('/check-the-room-availability', [RoomController::class, 'checkTheRoomAvailability'])->name('rooms.checkTheRoomAvailability.api');
